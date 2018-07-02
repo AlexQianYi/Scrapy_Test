@@ -2,6 +2,7 @@
 import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
+from scrapy import Request
 
 from scrapytest.items import ScrapytestItem
 
@@ -58,25 +59,23 @@ class CcgpSpider(CrawlSpider):
         for link in IncompletetLinks:
             link = response.urljoin(link)
             print(link)
-            #yield Request(link, callback=self.parse_item_ccgp)
+            yield Request(link, callback=self.parse_item_ccgp_content)
 
         for key in item:
             for data in item[key]:
                 self.logger.debug('item %s value %s' % (key, data))
                 #print('item %s value %s' % (key, data))
 
-        return item
 
-        def parse_item_ccgp_content(self, response):
+    def parse_item_ccgp_content(self, response):
 
-            print('parse item url: ' + response.url)
-            item = ScrapytestItem()
+        print('parse item url: ' + response.url)
+        item = ScrapytestItem()
 
-            project_name = response.xpath('')
-            if project_name.count > 0:
-                print('project name: ' + project_name)
-                item['project_name'] = project_name
+        project_name = response.xpath('//*[@id="detail"]/div[2]/div/div[2]/div/div[2]/table/tbody/tr[2]/td[2]/text()').extract()
+        if project_name.count > 0:
+            print('project name: ' + project_name)
+            item['project_name'] = project_name
 
+        yield item
 
-    #/ *[ @ id = "detail"] / div[2] / div / div[1] / div / div[2] / div[1] / ul / li[1] / a[
-        #contains( @ target, '_blank')] / @href
