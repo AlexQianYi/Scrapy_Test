@@ -62,8 +62,8 @@ class CcgpSpider(CrawlSpider):
 
         return item
 
-        def parse_item_ccgp_next(self, response):
-            
+        def parse_item_ccgp_content(self, response):
+
 
     #/ *[ @ id = "detail"] / div[2] / div / div[1] / div / div[2] / div[1] / ul / li[1] / a[
         #contains( @ target, '_blank')] / @href
