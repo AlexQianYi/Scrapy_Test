@@ -51,9 +51,14 @@ class CcgpSpider(CrawlSpider):
             response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a/text()').extract()
 
         # content link
-        item['content_link'] = \
-            response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a[contains(@target, "_blank")]/@href').extract()
+        #item['content_link'] = \
+        #    response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a[contains(@target, "_blank")]/@href').extract()
 
+        IncompletetLinks = response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a[contains(@target, "_blank")]/@href').extract()
+        for link in IncompletetLinks:
+            link = response.urljoin(link)
+            print(link)
+            #yield Request(link, callback=self.parse_item_ccgp)
 
         for key in item:
             for data in item[key]:
@@ -63,6 +68,14 @@ class CcgpSpider(CrawlSpider):
         return item
 
         def parse_item_ccgp_content(self, response):
+
+            print('parse item url: ' + response.url)
+            item = ScrapytestItem()
+
+            project_name = response.xpath('')
+            if project_name.count > 0:
+                print('project name: ' + project_name)
+                item['project_name'] = project_name
 
 
     #/ *[ @ id = "detail"] / div[2] / div / div[1] / div / div[2] / div[1] / ul / li[1] / a[

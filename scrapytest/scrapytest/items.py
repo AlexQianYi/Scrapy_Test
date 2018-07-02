@@ -34,5 +34,5 @@ class ScrapytestItem(scrapy.Item):
     project_except_price = scrapy.Field()
     project_manager = scrapy.Field()
     project_manager_tel = scrapy.Field()
-    
+
     # pass

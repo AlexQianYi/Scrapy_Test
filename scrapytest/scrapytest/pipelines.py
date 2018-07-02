@@ -9,9 +9,7 @@
 class ScrapytestPipeline(object):
     def process_item(self, item, spider):
         #print(item["name"])
-        print(item["url"])
-        print('content_link')
-        print(item['content_link'])
-        print('title')
-        print(item['title'])
+        #print(item["url"])
+        #print('title')
+        #print(item['title'])
         return item
