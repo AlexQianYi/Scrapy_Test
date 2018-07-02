@@ -10,6 +10,11 @@ import scrapy
 
 class ScrapytestItem(scrapy.Item):
     # define the fields for your item here like:
-    name = scrapy.Field()
-    link = scrapy.Field()
+
+    title = scrapy.Field()
+    url = scrapy.Field()
+    content_link = scrapy.Field()
+    publish_time = scrapy.Field()
+    location = scrapy.Field()
+    people = scrapy.Field()
     # pass
