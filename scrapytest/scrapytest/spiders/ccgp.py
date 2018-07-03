@@ -6,6 +6,9 @@ from scrapy import Request
 
 from scrapytest.items import ScrapytestItem
 
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+
 import sys
 import re
 
@@ -19,51 +22,81 @@ class CcgpSpider(CrawlSpider):
              callback='parse_item', follow=False)
     ]
 
+    def __init__(self):
+
+        self.driver = webdriver.Firefox(executable_path='/Users/yiqian/Downloads/geckodriver')
+        self.url_set = set()
+
     def parse(self, response):
 
         item = ScrapytestItem()
 
         item['url'] = [response.url]
-        print('aaa')
-
-        #self.logger.debug('start to parse url: %s' % response.url)
 
         if re.search(r'ccgp\.gov\.cn', response.url) is not None:
-            return self.parse_item_ccgp(response)
+            return self.parse_single_page_ccgp(response)
 
-        return item
+        return  item
 
-    def parse_item_ccgp(self, response):
+    def parse_single_page_ccgp(self, response):
 
-        item = ScrapytestItem()
-        item['url'] = [response.url]
+        self.driver.get(response.url)
+        count = 1
+        while True:
+            wait = WebDriverWait(self.driver, 10)
+            wait.until(lambda driver: driver.find_element_by_xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a'))
+            sel_list = self.driver.find_elements_by_xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a')
+            IncompleteUrl_list = [sel.get_attribute('href') for sel in sel_list]
+            CompleteUrl_list = [response.urljoin(link) for link in IncompleteUrl_list]
+            self.url_set |= set(CompleteUrl_list)
 
-        item['publish_time'] = \
-            response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/em[1]/text()').extract()
+            try:
+                print('========================================')
+                print('page: '+ str(count))
+                wait = WebDriverWait(self.driver, 10)
+                wait.until(lambda driver: driver.find_element_by_xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[2]/p/a[7]'))
+                next_page = self.driver.find_element_by_xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[2]/p/a[7]')
+                next_page.click()
+                count += 1
+            except:
+                print('get to the last page')
+                self.driver.close()
+                break
 
-        item['location'] = \
-            response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/em[2]/text()').extract()
+        ## handle single page content
 
-        item['people'] = \
-            response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/em[3]/text()').extract()
+        #item = ScrapytestItem()
+        #item['url'] = [response.url]
+
+        #item['publish_time'] = \
+        #    response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/em[1]/text()').extract()
+
+        #item['location'] = \
+        #    response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/em[2]/text()').extract()
+
+        #item['people'] = \
+        #    response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/em[3]/text()').extract()
 
         # content title
-        item['title'] = \
-            response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a/text()').extract()
+        #item['title'] = \
+        #    response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a/text()').extract()
 
-        # content link
-        #item['content_link'] = \
-        #    response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a[contains(@target, "_blank")]/@href').extract()
+        #IncompletetLinks = response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a[contains(@target, "_blank")]/@href').extract()
 
-        IncompletetLinks = response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a[contains(@target, "_blank")]/@href').extract()
-        for link in IncompletetLinks:
-            link = response.urljoin(link)
-            yield Request(link, callback=self.parse_item_ccgp_content)
+        #NextPageLink = response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[2]/p/a[7][contains(@class, "next")]/@href').extract()
 
+        #for link in IncompletetLinks:
+        #    link = response.urljoin(link)
+        #    yield Request(link, callback=self.parse_item_ccgp_content)
+
+        for link in self.url_set:
+            yield scrapy.Request(link, callback = self.parse_item_ccgp_content)
+
+        """
         for key in item:
             for data in item[key]:
                 self.logger.debug('item %s value %s' % (key, data))
-                #print('item %s value %s' % (key, data))
+        """
 
 
     def parse_item_ccgp_content(self, response):
