@@ -32,7 +32,7 @@ class ScrapytestItem(scrapy.Item):
     project_file_location = scrapy.Field()
     project_bit_time = scrapy.Field()
     project_bit_location = scrapy.Field()
-    project_except_price = scrapy.Field()
+    project_except_amount = scrapy.Field()
     project_manager = scrapy.Field()
     project_manager_tel = scrapy.Field()
 
