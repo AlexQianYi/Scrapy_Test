@@ -1,5 +1,6 @@
 # Word type
-from elasticsearch_dsl import DocType, Completion, Keyword, Text, Boolean, Integer, Date
+from elasticsearch_dsl import DocType, Completion, Keyword, Text, Boolean, Integer, \
+    Date, Nested, analyzer, InnerDoc
 
 from elasticsearch_dsl.connections import connections
 
@@ -41,5 +42,13 @@ class LagouType(DocType):
     project_manger_tel = Keyword()
 
     crawl_time = Date()
+
+class Meta:
+
+    index = 'lagou'
+    doc_type = 'projects'
+
+if __name__ == '__main__':
+    LagouType.init()
 
 
