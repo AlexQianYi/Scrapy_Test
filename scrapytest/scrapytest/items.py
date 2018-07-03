@@ -21,6 +21,7 @@ class ScrapytestItem(scrapy.Item):
     people = scrapy.Field()
 
     # detail page
+    project_url = scrapy.Field()
     project_name = scrapy.Field()
     project_category = scrapy.Field()
     project_apartment = scrapy.Field()
