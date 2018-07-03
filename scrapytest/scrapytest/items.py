@@ -57,7 +57,7 @@ def save2es(self):
     lagou_type.project_bit_location = self['project_bit_location']
     lagou_type.project_except_amount = self['project_except_amount']
     lagou_type.project_manager = self['project_manager']
-    lagou_type.project_maager = self['project_manager_tel']
+    lagou_type.project_manager = self['project_manager_tel']
 
     lagou_type.crawl_time = self['crawl_time']
 

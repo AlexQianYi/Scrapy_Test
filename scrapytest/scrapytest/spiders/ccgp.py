@@ -88,7 +88,7 @@ class CcgpSpider(CrawlSpider):
         #    yield Request(link, callback=self.parse_item_ccgp_content)
 
         with open('url_set.txt', mode = 'w') as f:
-            f.write(repr(url_set))
+            f.write(repr(self.url_set))
 
         for link in self.url_set:
             yield scrapy.Request(link, callback = self.parse_item_ccgp_content)
