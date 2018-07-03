@@ -51,8 +51,6 @@ class CcgpSpider(CrawlSpider):
             self.url_set |= set(CompleteUrl_list)
 
             try:
-                print('========================================')
-                print('page: '+ str(count))
                 wait = WebDriverWait(self.driver, 10)
                 wait.until(lambda driver: driver.find_element_by_xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[2]/p/a[7]'))
                 next_page = self.driver.find_element_by_xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[2]/p/a[7]')
@@ -89,15 +87,11 @@ class CcgpSpider(CrawlSpider):
         #    link = response.urljoin(link)
         #    yield Request(link, callback=self.parse_item_ccgp_content)
 
+        with open('url_set.txt', mode = 'w') as f:
+            f.write(repr(url_set))
+
         for link in self.url_set:
             yield scrapy.Request(link, callback = self.parse_item_ccgp_content)
-
-        """
-        for key in item:
-            for data in item[key]:
-                self.logger.debug('item %s value %s' % (key, data))
-        """
-
 
     def parse_item_ccgp_content(self, response):
 
@@ -132,9 +126,9 @@ class CcgpSpider(CrawlSpider):
 
         item['project_manager_tel'] = response.xpath('//*[@class="table"]//tr[14]/td[2]/text()').extract()
 
-
-
-        #item['project_name'] = response.xpath('//*[@id="detail"]/div[2]/div/div[2]/div/div[2]/table/tbody/tr[2]/td[2]/text()').extract()
+        for key in item:
+            for data in item[key]:
+                self.logger.debug('item %s value %s' % (key, data))
 
         yield item
 
