@@ -75,7 +75,7 @@ class CcgpSpider(CrawlSpider):
 
         item['project_name'] = response.xpath('//*[@class="table"]//tr[2]/td[2]/text()').extract()
 
-        item['project_category'] = response.xpath('//*[@class="table"]//tr[3]/td[2]/p/p/text()').extract()
+        item['project_category'] = response.xpath('//*[@class="table"]//tr[3]/td[2]/p/text()').extract()
 
         item['project_apartment'] = response.xpath('//*[@class="table"]//tr[4]/td[2]/text()').extract()
 
