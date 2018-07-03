@@ -5,19 +5,41 @@ from elasticsearch_dsl.connections import connections
 
 from elasticsearch_dsl.analysis import CustomAnalyzer
 
+from datetime import datetime
+
 # Step 1 Create ES connection
-connections.create_connection(hosts = ["127.0.0.1"])
+connections.create_connection(hosts = ["localhost"])
 
-# define word divider
-class Analyzer(CustomAnalyzer):
+class LagouType(DocType):
 
-    def get_analysis_definition(self):
-        return {}
+    project_url = Keyword()
 
-# create word analysis object
-ik_analyzer = Analyzer('ik_max_word', filter = ['lowercase'])
+    project_name = Text(analyzer = 'ik_max_word')
 
-class Field(DocType):
-    # Auto Complete in search
-    suggest = Completion(analyzer=ik_analyzer)
+    project_category = Text(analyzer = 'ik_max_word')
+
+    project_apartment = Keyword()
+
+    project_location = Keyword()
+
+    project_publish_time = Date()
+
+    project_file_time = Date()
+
+    project_file_price = Keyword()
+
+    project_file_location = Keyword()
+
+    project_bit_time = Date()
+
+    project_bit_location = Keyword()
+
+    project_except_amount = Keyword()
+
+    project_manager = Keyword()
+
+    project_manger_tel = Keyword()
+
+    crawl_time = Date()
+
 

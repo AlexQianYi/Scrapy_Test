@@ -12,4 +12,5 @@ class ScrapytestPipeline(object):
         #print(item["url"])
         #print('title')
         #print(item['title'])
+        item.save_es()
         return item
