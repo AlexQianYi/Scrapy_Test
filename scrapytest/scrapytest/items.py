@@ -50,18 +50,21 @@ def save2es(self):
     lagou_type.project_apartment = self['project_apartment']
     lagou_type.project_location = self['project_location']
     lagou_type.project_publish_time = self['project_publish_time']
+
     lagou_type.project_file_time = self['project_file_time']
     lagou_type.project_file_price = self['project_file_price']
     lagou_type.project_file_location = self['project_file_location']
+
     lagou_type.project_bit_time = self['project_bit_time']
     lagou_type.project_bit_location = self['project_bit_location']
+
     lagou_type.project_except_amount = self['project_except_amount']
     lagou_type.project_manager = self['project_manager']
-    lagou_type.project_manager = self['project_manager_tel']
+    lagou_type.project_manager_tel = self['project_manager_tel']
 
-    lagou_type.crawl_time = self['crawl_time']
+    #lagou_type.crawl_time = self['crawl_time']
 
-    lagou_type.meta.id = self['url_object_id']
+    #lagou_type.meta.id = self['url_object_id']
 
     lagou_type.save()
 

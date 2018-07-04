@@ -190,3 +190,26 @@ See /usr/include/servers/bootstrap_defs.h for the error codes.
 2018-07-03 16:58:36.548 firefox-bin[7706:811816] IMKInputSession [0x13086de50 presentFunctionRowItemTextInputViewWithEndpoint:completionHandler:] : [self textInputContext]=0x11e5ee220 *NO* NSRemoteViewController to client, NSError=Error Domain=NSCocoaErrorDomain Code=4097 "connection from pid 0" UserInfo={NSDebugDescription=connection from pid 0}, com.apple.inputmethod.EmojiFunctionRowItem
 2018-07-03 16:59:34.951 firefox-bin[7706:811816] IMKInputSession [0x13086de50 presentFunctionRowItemTextInputViewWithEndpoint:completionHandler:] : [self textInputContext]=0x11e5ee220 *NO* NSRemoteViewController to client, NSError=Error Domain=NSCocoaErrorDomain Code=4097 "connection from pid 0" UserInfo={NSDebugDescription=connection from pid 0}, com.apple.inputmethod.EmojiFunctionRowItem
 2018-07-03 17:00:51.164 firefox-bin[7706:811816] IMKInputSession [0x13086de50 presentFunctionRowItemTextInputViewWithEndpoint:completionHandler:] : [self textInputContext]=0x11e5ee220 *NO* NSRemoteViewController to client, NSError=Error Domain=NSCocoaErrorDomain Code=4097 "connection from pid 0" UserInfo={NSDebugDescription=connection from pid 0}, com.apple.inputmethod.EmojiFunctionRowItem
+2018-07-03 21:39:47.561 plugin-container[7708:812030] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-03 21:39:47.562 plugin-container[14390:1306261] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-03 21:39:47.562 plugin-container[7707:811943] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-04 05:38:41.472 plugin-container[7708:812030] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-04 05:38:41.473 plugin-container[7707:811943] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-04 05:38:41.535 plugin-container[14390:1306261] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-04 08:49:50.732 plugin-container[7707:811943] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-04 08:49:50.744 plugin-container[7708:812030] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-04 08:49:50.746 plugin-container[14390:1306261] _mthid_copyDeviceInfo(144115188092633088) failed
+1530668492713	geckodriver	INFO	geckodriver 0.20.1
+1530668492722	geckodriver	INFO	Listening on 127.0.0.1:63167
+1530668493726	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-profile" "/var/folders/nq/0mpynycd6mg_8903k89bx5f00000gn/T/rust_mozprofile.yK7f2uHSBSZU"
+2018-07-04 09:41:35.124 plugin-container[16043:1400389] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x7d3f, name = 'com.apple.tsm.portname'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2018-07-04 09:41:35.710 plugin-container[16043:1400389] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x872f, name = 'com.apple.coredrag'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+1530668495735	Marionette	INFO	Listening on port 63179
+1530668495792	Marionette	WARN	TLS certificate errors will be ignored for this session
+2018-07-04 09:41:36.120 plugin-container[16044:1400472] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x803f, name = 'com.apple.tsm.portname'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2018-07-04 09:41:36.210 plugin-container[16044:1400472] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x171b, name = 'com.apple.coredrag'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+*** UTM:SVC TimerManager:registerTimer called after profile-before-change notification. Ignoring timer registration for id: telemetry_modules_ping

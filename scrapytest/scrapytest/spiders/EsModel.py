@@ -1,5 +1,8 @@
 # Word type
-from elasticsearch_dsl import DocType, Completion, Keyword, Text, Boolean, Integer, \
+#from elasticsearch_dsl import DocType, Completion, Keyword, Text, Boolean, Integer, \
+#    Date, Nested, analyzer, InnerDoc
+
+from elasticsearch_dsl import Document, Completion, Keyword, Text, Boolean, Integer, \
     Date, Nested, analyzer, InnerDoc
 
 from elasticsearch_dsl.connections import connections
@@ -9,15 +12,15 @@ from elasticsearch_dsl.analysis import CustomAnalyzer
 from datetime import datetime
 
 # Step 1 Create ES connection
-connections.create_connection(hosts = "127.0.0.1")
+connections.create_connection(hosts = ["localhost"])
 
-class LagouType(DocType):
+class LagouType(Document):
 
     project_url = Keyword()
 
-    project_name = Text(analyzer = 'ik_max_word')
+    project_name = Text(analyzer = 'snowball')
 
-    project_category = Text(analyzer = 'ik_max_word')
+    project_category = Text(analyzer = 'snowball')
 
     project_apartment = Keyword()
 
@@ -41,12 +44,20 @@ class LagouType(DocType):
 
     project_manger_tel = Keyword()
 
-    crawl_time = Date()
+    #crawl_time = Date()
 
-class Meta:
+    class Index:
 
-    index = 'lagou'
-    doc_type = 'projects'
+        name = 'lagou'
+
+    """
+    def save(self, ** kwargs):
+        self.lines = len(self.body.split())
+        return super(Lagou, self).save(** kwargs)
+
+    def is_published(self):
+        return datetime.now() > self.published_from
+    """
 
 if __name__ == '__main__':
     LagouType.init()
