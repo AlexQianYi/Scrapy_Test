@@ -8,6 +8,10 @@
 import scrapy
 from .EsModel import LagouType
 
+from elasticsearch import Elasticsearch
+
+es = Elasticsearch()
+
 
 class ScrapytestItem(scrapy.Item):
     # define the fields for your item here like:
@@ -68,6 +72,20 @@ class ScrapytestItem(scrapy.Item):
         #lagou_type.meta.id = self['url_object_id']
 
         lagou_type.save()
+
+
+        if es.indices.exists(index='lagou3') is not True:
+            print('ES index created failed!!!!!!!')
+
+        print('Search all ==================================')
+        _query_all = {
+            'query':{
+                'match_all':{}
+            }
+        }
+
+        _searched = es.search(index = 'lagou3', body = _query_all)
+        print(_searched)
 
         return
 
