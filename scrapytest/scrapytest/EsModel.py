@@ -26,15 +26,15 @@ class LagouType(Document):
 
     project_location = Keyword()
 
-    project_publish_time = Date()
+    project_publish_time = Text(analyzer = 'snowball')
 
-    project_file_time = Date()
+    project_file_time = Text(analyzer = 'snowball')
 
     project_file_price = Keyword()
 
     project_file_location = Keyword()
 
-    project_bit_time = Date()
+    project_bit_time = Text(analyzer = 'snowball')
 
     project_bit_location = Keyword()
 
@@ -48,7 +48,7 @@ class LagouType(Document):
 
     class Index:
 
-        name = 'lagou'
+        name = 'lagou3'
 
     """
     def save(self, ** kwargs):
