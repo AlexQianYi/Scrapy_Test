@@ -12,6 +12,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 import sys
 import re
 
+import xml.sax
+from .MainXMLHandler import MainXMLHandler
+
+
+
 class CcgpSpider(CrawlSpider):
     name = 'ccgp'
     allowed_domains = []
@@ -25,9 +30,20 @@ class CcgpSpider(CrawlSpider):
     def __init__(self):
 
         self.driver = webdriver.Firefox(executable_path='/Users/yiqian/Downloads/geckodriver')
-        self.url_set = set()
         self.allowed_domains = ['ccgp.gov.cn']
         self.start_urls = ['http://www.ccgp.gov.cn/cggg/zygg/gkzb/']
+        self.parser = xml.sax.make_parser()
+
+        self.url_set = set()
+
+        self.parser = xml.sax.make_parser()
+        self.parser.setFeature(xml.sax.handler.feature_namespaces, 0)
+
+        Handler = MainXMLHandler()
+        self.parser.setContentHandler(Handler)
+
+        self.parser.parse("./SpiderControl.xml")
+
 
     def parse(self, response):
 
@@ -108,6 +124,5 @@ class CcgpSpider(CrawlSpider):
 
         yield item
 
-        def readMainXML(self, mainXML_path):
 
 
