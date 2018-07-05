@@ -13,7 +13,6 @@ import sys
 import re
 
 import xml.sax
-from .MainXMLHandler import MainXMLHandler
 
 
 
@@ -27,6 +26,8 @@ class CcgpSpider(CrawlSpider):
              callback='parse_item', follow=False)
     ]
 
+    XML_file_path = []
+
     def __init__(self):
 
         self.driver = webdriver.Firefox(executable_path='/Users/yiqian/Downloads/geckodriver')
@@ -34,15 +35,32 @@ class CcgpSpider(CrawlSpider):
         self.start_urls = ['http://www.ccgp.gov.cn/cggg/zygg/gkzb/']
         self.parser = xml.sax.make_parser()
 
+        self.ReadMainXML()
+
         self.url_set = set()
 
-        self.parser = xml.sax.make_parser()
-        self.parser.setFeature(xml.sax.handler.feature_namespaces, 0)
+    class MainXMLHandler(xml.sax.ContentHandler):
+        def __int__(self):
+            self.CurrentData = ""
+            self.FilePath = ""
+            self.PageFile = ""
 
-        Handler = MainXMLHandler()
-        self.parser.setContentHandler(Handler)
+        def startElement(self, tag, attributes):
+            self.CurrentData = tag
+            if tag == "PageFile":
+                PageID = attributes["id"]
+                print("===========Page " + PageID + "==============")
 
-        self.parser.parse("./SpiderControl.xml")
+        def endElement(self, tag):
+            if self.CurrentData == "FilePath":
+                print ("File path: " + self.FilePath)
+            self.CurrentData = ""
+
+        def characters(self, content):
+            if self.CurrentData == "PageFile":
+                self.PageFile = content
+            elif self.CurrentData == "FilePath":
+                self.FilePath = content
 
 
     def parse(self, response):
@@ -123,6 +141,19 @@ class CcgpSpider(CrawlSpider):
                 self.logger.debug('item %s value %s' % (key, data))
 
         yield item
+
+    def ReadMainXML(self):
+
+        self.parser = xml.sax.make_parser()
+        self.parser.setFeature(xml.sax.handler.feature_namespaces, 0)
+
+        Handler = MainXMLHandler()
+        self.parser.setContentHandler(Handler)
+
+        self.parser.parse("./SpiderControl.xml")
+
+
+
 
 
 

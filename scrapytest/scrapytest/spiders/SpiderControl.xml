@@ -3,17 +3,17 @@
 <!-- FilePath: Configure File of Website-->
 
 <SpiderControl>
+	<PageFiles>
+		<PageFile id="1">
+			<FilePath>"./CCGP_bit_invitation.xml"</FilePath>
+		</PageFile>
+		
+		<PageFile id="2">
+			<FilePath>"./CCGP_bit_win.xml"</FilePath>
+		</PageFile>
 
-	<PageFile id = "1">
-		<FilePath>"./CCGP_bit_invitation.xml"</FilePath>
-	</PageFile>
-	
-	<PageFile id = "2">
-		<FilePath>"./CCGP_bit_win.xml"</FilePath>
-	</PageFile>
-
-	<PageFile id = "3">
-		<FilePath>""</FilePath>
-	</PageFile>	
-
+		<PageFile id="3">
+			<FilePath>""</FilePath>
+		</PageFile>	
+	</PageFiles>
 </SpiderControl>
