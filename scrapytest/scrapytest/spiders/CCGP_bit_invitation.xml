@@ -4,6 +4,10 @@
 
 	<PageID>1</PageID>
 
+	<Frequency>
+		300
+	</Frequency>
+
 	<PageUrl>
 		"http://www.ccgp.gov.cn/cggg/zygg/gkzb/"
 	</PageUrl>
@@ -27,5 +31,85 @@
 	<BrowerserDriverPath>
 		"/Users/yiqian/Downloads/geckodriver"
 	</BrowerserDriverPath>
+
+	<XPath>
+
+		<TitlePage>
+
+			<TitleContentXPath>
+			</TitleContentXPath>
+
+			<ContentUrl>
+				"//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a"
+			</ContentUrl>
+
+			<NextPage>
+				"//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[2]/p/a[7]"
+			</NextPage>
+
+			<ContentUrlFile>
+				"./ccgp_url_set.txt"
+			</ContentUrlFile>
+
+		</TitlePage>
+
+		<ContentPage>
+
+			<project_name>
+				"//*[@class="table"]//tr[2]/td[2]/text()"
+			</project_name>
+
+			<project_category>
+				"//*[@class="table"]//tr[3]/td[2]/p/text()"
+			</project_category>
+
+			<project_apartment>
+				"//*[@class="table"]//tr[4]/td[2]/text()"
+			</project_apartment>
+
+			<project_location>
+				"//*[@class="table"]//tr[5]/td[2]/text()"
+			</project_location>
+
+			<project_publish_time>
+				"//*[@class="table"]//tr[5]/td[4]/text()"
+			</project_publish_time>
+
+			<project_file_time>
+				"//*[@class="table"]//tr[6]/td[2]/text()"
+			</project_file_time>
+
+			<project_file_price>
+				"//*[@class="table"]//tr[7]/td[2]/text()"
+			</project_file_price>
+
+			<project_file_location>
+				"//*[@class="table"]//tr[8]/td[2]/text()"
+			</project_file_location>
+
+			<project_bit_time>
+				"//*[@class="table"]//tr[9]/td[2]/text()"
+			</project_bit_time>
+
+			<project_bit_location>
+				"//*[@class="table"]//tr[10]/td[2]/text()"
+			</project_bit_location>
+
+			<project_except_amount>
+				"//*[@class="table"]//tr[11]/td[2]/text()"
+			</project_except_amount>
+
+			<project_manager>
+				"//*[@class="table"]//tr[13]/td[2]/text()"
+			</project_manager>
+
+			<project_manager_tel>
+				"//*[@class="table"]//tr[14]/td[2]/text()"
+			</project_manager_tel>
+
+
+		</ContentPage>
+
+	</XPath>
 
 </SpiderUrlControl

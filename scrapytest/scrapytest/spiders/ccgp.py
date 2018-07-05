@@ -14,8 +14,8 @@ import re
 
 class CcgpSpider(CrawlSpider):
     name = 'ccgp'
-    allowed_domains = ['ccgp.gov.cn']
-    start_urls = ['http://www.ccgp.gov.cn/cggg/zygg/gkzb/']
+    allowed_domains = []
+    start_urls = []
 
     rules = [
         Rule(LinkExtractor(allow = 'www.ccgp.gov.cn/cggg/zyggg/gkzb/201807/t.*?htm'),
@@ -26,6 +26,8 @@ class CcgpSpider(CrawlSpider):
 
         self.driver = webdriver.Firefox(executable_path='/Users/yiqian/Downloads/geckodriver')
         self.url_set = set()
+        self.allowed_domains = ['ccgp.gov.cn']
+        self.start_urls = ['http://www.ccgp.gov.cn/cggg/zygg/gkzb/']
 
     def parse(self, response):
 
@@ -60,32 +62,6 @@ class CcgpSpider(CrawlSpider):
                 print('get to the last page')
                 self.driver.close()
                 break
-
-        ## handle single page content
-
-        #item = ScrapytestItem()
-        #item['url'] = [response.url]
-
-        #item['publish_time'] = \
-        #    response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/em[1]/text()').extract()
-
-        #item['location'] = \
-        #    response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/em[2]/text()').extract()
-
-        #item['people'] = \
-        #    response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/em[3]/text()').extract()
-
-        # content title
-        #item['title'] = \
-        #    response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a/text()').extract()
-
-        #IncompletetLinks = response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a[contains(@target, "_blank")]/@href').extract()
-
-        #NextPageLink = response.xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[2]/p/a[7][contains(@class, "next")]/@href').extract()
-
-        #for link in IncompletetLinks:
-        #    link = response.urljoin(link)
-        #    yield Request(link, callback=self.parse_item_ccgp_content)
 
         with open('url_set.txt', mode = 'w') as f:
             f.write(repr(self.url_set))
@@ -131,4 +107,7 @@ class CcgpSpider(CrawlSpider):
                 self.logger.debug('item %s value %s' % (key, data))
 
         yield item
+
+        def readMainXML(self, mainXML_path):
+
 
