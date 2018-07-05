@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<SpiderUrlControl>
+
+	<PageID>1</PageID>
+
+	<PageUrl>
+		"http://www.ccgp.gov.cn/cggg/zygg/gkzb/"
+	</PageUrl>
+
+	<PageAllowDomains>
+		"ccgp.gov.cn"
+	</PageAllowDomains>
+
+	<PageAllowDomainsRE>
+		"r'ccgp\.gov\.cn"
+	</PageAllowDomainsRE>
+
+	<PageStartUrl>
+		"http://www/ccgp.gov.cn/cggg/zyggg/gkzb"
+	</PageStartUrl>
+
+	<PageRule_allow>
+		"www.ccgp.gov.cn/cggg/zyggg/gkzb/201807/t.*?htm"
+	</PageRule_allow>
+
+	<BrowerserDriverPath>
+		"/Users/yiqian/Downloads/geckodriver"
+	</BrowerserDriverPath>
+
+</SpiderUrlControl

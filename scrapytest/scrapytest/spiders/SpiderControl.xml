@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+
+<!-- FilePath: Configure File of Website-->
+
+<SpiderControl>
+
+	<PageFile id = "1">
+		<FilePath>
+			"./CCGP_bit_invitation.xml"
+		</FilePath>
+	</PageFile>
+	
+	<PageFile id = "2">
+		<FilePath>
+			"./CCGP_bit_win.xml"
+		</FilePath>
+	</PageFile>
+
+	<PageFile id = "3">
+		<FilePath>
+		</FilePath>
+	</PageFile>	
+
+</SpiderControl>
