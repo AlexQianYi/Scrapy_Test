@@ -30,7 +30,6 @@ class CcgpSpider(CrawlSpider):
     PageAllowDomainsRE_list = []
     start_urls = []
     PageRule_allow_list = []
-    BrowserDriverPath_list = []
 
     ContentUrl_list = []
     NextPage_list = []
@@ -59,9 +58,9 @@ class CcgpSpider(CrawlSpider):
         self.Global_Index = 0
         self.Global_Index_max = 0
         self.ReadXML('./SpiderControl.xml')
-
-
         self.driver = webdriver.Firefox(executable_path='/Users/yiqian/Downloads/geckodriver')
+
+
         self.allowed_domains = ['ccgp.gov.cn']
         self.start_urls = ['http://www.ccgp.gov.cn/cggg/zygg/gkzb/']
 
@@ -76,27 +75,29 @@ class CcgpSpider(CrawlSpider):
 
         for i in range(self.Global_Index_max):
             if re.search(self.PageAllowDomainsRE_list[i], response.url) is not None:
-                return self.parse_single_page_ccgp(response)
+                return self.parse_single_page_ccgp(response, i)
 
         return item
 
 
-    def parse_single_page_ccgp(self, response):
+    def parse_single_page_ccgp(self, response, index):
 
         self.driver.get(response.url)
         count = 1
         while True:
             wait = WebDriverWait(self.driver, 10)
-            wait.until(lambda driver: driver.find_element_by_xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a'))
-            sel_list = self.driver.find_elements_by_xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[1]/ul/li/a')
+            print(self.ContentUrl_list[index])
+            print(self.NextPage_list[index])
+            wait.until(lambda driver: driver.find_element_by_xpath(self.ContentUrl_list[index]))
+            sel_list = self.driver.find_elements_by_xpath(self.ContentUrl_list[index])
             IncompleteUrl_list = [sel.get_attribute('href') for sel in sel_list]
             CompleteUrl_list = [response.urljoin(link) for link in IncompleteUrl_list]
             self.url_set |= set(CompleteUrl_list)
 
             try:
                 wait = WebDriverWait(self.driver, 10)
-                wait.until(lambda driver: driver.find_element_by_xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[2]/p/a[7]'))
-                next_page = self.driver.find_element_by_xpath('//*[@id="detail"]/div[2]/div/div[1]/div/div[2]/div[2]/p/a[7]')
+                wait.until(lambda driver: driver.find_element_by_xpath(self.NextPage_list[index]))
+                next_page = self.driver.find_element_by_xpath(self.NextPage_list[index])
                 next_page.click()
                 count += 1
             except:
@@ -108,6 +109,7 @@ class CcgpSpider(CrawlSpider):
             f.write(repr(self.url_set))
 
         for link in self.url_set:
+            self.Global_Index = index
             yield scrapy.Request(link, callback = self.parse_item_ccgp_content)
 
     def parse_item_ccgp_content(self, response):
@@ -117,31 +119,31 @@ class CcgpSpider(CrawlSpider):
 
         item['project_url'] = response.url
 
-        item['project_name'] = response.xpath('//*[@class="table"]//tr[2]/td[2]/text()').extract()
+        item['project_name'] = response.xpath(self.project_name_list[self.Global_Index]).extract()
 
-        item['project_category'] = response.xpath('//*[@class="table"]//tr[3]/td[2]/p/text()').extract()
+        item['project_category'] = response.xpath(self.project_category_list[self.Global_Index]).extract()
 
-        item['project_apartment'] = response.xpath('//*[@class="table"]//tr[4]/td[2]/text()').extract()
+        item['project_apartment'] = response.xpath(self.project_apartment_list[self.Global_Index]).extract()
 
-        item['project_location'] = response.xpath('//*[@class="table"]//tr[5]/td[2]/text()').extract()
+        item['project_location'] = response.xpath(self.project_location_list[self.Global_Index]).extract()
 
-        item['project_publish_time'] = response.xpath('//*[@class="table"]//tr[5]/td[4]/text()').extract()
+        item['project_publish_time'] = response.xpath(self.project_publish_time_list[self.Global_Index]).extract()
 
-        item['project_file_time'] = response.xpath('//*[@class="table"]//tr[6]/td[2]/text()').extract()
+        item['project_file_time'] = response.xpath(self.project_file_time_list[self.Global_Index]).extract()
 
-        item['project_file_price'] = response.xpath('//*[@class="table"]//tr[7]/td[2]/text()').extract()
+        item['project_file_price'] = response.xpath(self.project_file_price_list[self.Global_Index]).extract()
 
-        item['project_file_location'] = response.xpath('//*[@class="table"]//tr[8]/td[2]/text()').extract()
+        item['project_file_location'] = response.xpath(self.project_file_location_list[self.Global_Index]).extract()
 
-        item['project_bit_time'] = response.xpath('//*[@class="table"]//tr[9]/td[2]/text()').extract()
+        item['project_bit_time'] = response.xpath(self.project_bit_time_list[self.Global_Index]).extract()
 
-        item['project_bit_location'] = response.xpath('//*[@class="table"]//tr[10]/td[2]/text()').extract()
+        item['project_bit_location'] = response.xpath(self.project_bit_location_list[self.Global_Index]).extract()
 
-        item['project_except_amount'] = response.xpath('//*[@class="table"]//tr[11]/td[2]/text()').extract()
+        item['project_except_amount'] = response.xpath(self.project_except_amount_list[self.Global_Index]).extract()
 
-        item['project_manager'] = response.xpath('//*[@class="table"]//tr[13]/td[2]/text()').extract()
+        item['project_manager'] = response.xpath(self.project_manager_list[self.Global_Index]).extract()
 
-        item['project_manager_tel'] = response.xpath('//*[@class="table"]//tr[14]/td[2]/text()').extract()
+        item['project_manager_tel'] = response.xpath(self.project_manager_tel_list[self.Global_Index]).extract()
 
         for key in item:
             for data in item[key]:
@@ -193,9 +195,6 @@ class CcgpSpider(CrawlSpider):
         PageRule_allow = ParaXMLHandler.find_nodes('PageRule_allow')
         self.PageRule_allow_list.append(PageRule_allow[0].text)
 
-        BrowserDriverPath = ParaXMLHandler.find_nodes('BrowserDriverPath')
-        self.BrowserDriverPath_list.append(BrowserDriverPath[0].text)
-
         ContentUrl = ParaXMLHandler.find_nodes('XPath/TitlePage/ContentUrl')
         self.ContentUrl_list.append(ContentUrl[0].text)
 
@@ -225,6 +224,9 @@ class CcgpSpider(CrawlSpider):
 
         project_file_price = ParaXMLHandler.find_nodes('XPath/ContentPage/project_file_price')
         self.project_file_price_list.append(project_file_price[0].text)
+
+        project_file_location = ParaXMLHandler.find_nodes('XPath/ContentPage/project_file_location')
+        self.project_file_location_list.append(project_file_location[0].text)
 
         project_bit_time = ParaXMLHandler.find_nodes('XPath/ContentPage/project_bit_time')
         self.project_bit_time_list.append(project_bit_time[0].text)
