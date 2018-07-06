@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
 
             Frequency = ParaXMLHandler.find_nodes('Frequency')
-            print(Frequency[0].text)
+            print(type(Frequency[0].text))
 
             PageUrl = ParaXMLHandler.find_nodes('PageUrl')
             print(PageUrl[0].text)
