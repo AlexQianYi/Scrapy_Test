@@ -14,12 +14,15 @@ import re
 
 import xml.sax
 
+from .MainXMLHandler import MainXMLHandler
+
 
 
 class CcgpSpider(CrawlSpider):
     name = 'ccgp'
     allowed_domains = []
     start_urls = []
+    page_file = []
 
     rules = [
         Rule(LinkExtractor(allow = 'www.ccgp.gov.cn/cggg/zyggg/gkzb/201807/t.*?htm'),
@@ -30,10 +33,12 @@ class CcgpSpider(CrawlSpider):
 
     def __init__(self):
 
+        self.MainXMLHandler = MainXMLHandler('./SpiderControl.xml')
+
         self.driver = webdriver.Firefox(executable_path='/Users/yiqian/Downloads/geckodriver')
         self.allowed_domains = ['ccgp.gov.cn']
         self.start_urls = ['http://www.ccgp.gov.cn/cggg/zygg/gkzb/']
-        self.parser = xml.sax.make_parser()
+
 
         self.ReadMainXML()
 
@@ -144,13 +149,21 @@ class CcgpSpider(CrawlSpider):
 
     def ReadMainXML(self):
 
-        self.parser = xml.sax.make_parser()
-        self.parser.setFeature(xml.sax.handler.feature_namespaces, 0)
+        PageNodes = MainXMLHandler.find_nodes('PagesFiles/PageFile')
 
-        Handler = MainXMLHandler()
-        self.parser.setContentHandler(Handler)
+        for Node in PageNodes:
+            self.page_file.append(Node.findall('FilePath'))
 
-        self.parser.parse("./SpiderControl.xml")
+        print
+
+
+        # node = XMLHandler.find_node('PageFiles/PageFile')
+        result = XMLHandler.get_node_by_keyvalue("PageFiles/PageFile", {"id": "1"})
+        node = result.findall('FilePath')
+
+        print(result)
+        print(node[0], node[0].text)
+
 
 
 

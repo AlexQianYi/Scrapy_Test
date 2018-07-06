@@ -4,9 +4,7 @@
 
 	<PageID>1</PageID>
 
-	<Frequency>
-		300
-	</Frequency>
+	<Frequency>300</Frequency>
 
 	<PageUrl>
 		"http://www.ccgp.gov.cn/cggg/zygg/gkzb/"
@@ -112,4 +110,4 @@
 
 	</XPath>
 
-</SpiderUrlControl
+</SpiderUrlControl>
