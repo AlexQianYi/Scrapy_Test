@@ -15,6 +15,7 @@ import re
 import xml.sax
 
 from .MainXMLHandler import MainXMLHandler
+from .ParameterXMLHandler import ParameterXMLHandler
 
 
 
@@ -40,32 +41,9 @@ class CcgpSpider(CrawlSpider):
         self.start_urls = ['http://www.ccgp.gov.cn/cggg/zygg/gkzb/']
 
 
-        self.ReadMainXML()
+        self.ReadXML('./SpiderControl.xml')
 
         self.url_set = set()
-
-    class MainXMLHandler(xml.sax.ContentHandler):
-        def __int__(self):
-            self.CurrentData = ""
-            self.FilePath = ""
-            self.PageFile = ""
-
-        def startElement(self, tag, attributes):
-            self.CurrentData = tag
-            if tag == "PageFile":
-                PageID = attributes["id"]
-                print("===========Page " + PageID + "==============")
-
-        def endElement(self, tag):
-            if self.CurrentData == "FilePath":
-                print ("File path: " + self.FilePath)
-            self.CurrentData = ""
-
-        def characters(self, content):
-            if self.CurrentData == "PageFile":
-                self.PageFile = content
-            elif self.CurrentData == "FilePath":
-                self.FilePath = content
 
 
     def parse(self, response):
@@ -147,24 +125,30 @@ class CcgpSpider(CrawlSpider):
 
         yield item
 
-    def ReadMainXML(self):
+    def ReadXML(self, MainXML_path):
 
-        PageNodes = MainXMLHandler.find_nodes('PagesFiles/PageFile')
+        Config_file_list = self.ReadMainXML(MainXML_path)
 
+        for file in Config_file_list:
+            self.ReadConfigXML(file)
+
+    def ReadMainXML(self, MainXML_path):
+
+        MainXMLHandler = MainXMLHandler('./SpiderControl.xml')
+        PageNodes = MainXMLHandler.find_nodes('PageFiles/PageFile')
+
+        Config_file_list = []
         for Node in PageNodes:
-            self.page_file.append(Node.findall('FilePath'))
+            Config_file_list += Node.findall('FilePath')
 
-        print
+        return Config_file_list
 
+    def ReadConfigXML(self, Config_file):
 
-        # node = XMLHandler.find_node('PageFiles/PageFile')
-        result = XMLHandler.get_node_by_keyvalue("PageFiles/PageFile", {"id": "1"})
-        node = result.findall('FilePath')
-
-        print(result)
-        print(node[0], node[0].text)
-
-
+        if Config_file.text != None:
+            ParaXMLHandler = ParameterXMLHandler(Config_file.text)
+            Frequency = ParaXMLHandler.find_nodes('Frequency')
+            print(Frequency[0].text)
 
 
 

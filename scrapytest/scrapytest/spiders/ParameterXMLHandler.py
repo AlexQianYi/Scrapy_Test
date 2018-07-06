@@ -32,7 +32,7 @@ class ParameterXMLHandler():
     def find_children_node(self, node, path):
         return node.findall(path)
 
-
+"""
 if __name__ == "__main__":
 
     MainXMLHandler = MainXMLHandler('./SpiderControl.xml')
@@ -46,7 +46,10 @@ if __name__ == "__main__":
         print(file.text)
         if file.text != None:
             ParaXMLHandler = ParameterXMLHandler(file.text)
+
+
             Frequency = ParaXMLHandler.find_nodes('Frequency')
             print(Frequency[0].text)
+"""
 
 
