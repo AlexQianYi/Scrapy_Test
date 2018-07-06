@@ -50,17 +50,16 @@ class CcgpSpider(CrawlSpider):
     project_manager_list = []
     project_manager_tel_list = []
 
-    rules = [
-        Rule(LinkExtractor(allow = 'www.ccgp.gov.cn/cggg/zyggg/gkzb/201807/t.*?htm'),
-             callback='parse_item', follow=False)
-    ]
+    rules = []
 
     XML_file_path = []
 
-    def __init__(self):
 
-        self.ReadXML('./SpiderControl.xml')
+    def __init__(self):
         self.Global_Index = 0
+        self.Global_Index_max = 0
+        self.ReadXML('./SpiderControl.xml')
+
 
         self.driver = webdriver.Firefox(executable_path='/Users/yiqian/Downloads/geckodriver')
         self.allowed_domains = ['ccgp.gov.cn']
@@ -75,10 +74,12 @@ class CcgpSpider(CrawlSpider):
 
         item['url'] = [response.url]
 
-        if re.search(r'ccgp\.gov\.cn', response.url) is not None:
-            return self.parse_single_page_ccgp(response)
+        for i in range(self.Global_Index_max):
+            if re.search(self.PageAllowDomainsRE_list[i], response.url) is not None:
+                return self.parse_single_page_ccgp(response)
 
-        return  item
+        return item
+
 
     def parse_single_page_ccgp(self, response):
 
@@ -153,12 +154,16 @@ class CcgpSpider(CrawlSpider):
         Config_file_list = self.ReadMainXML(MainXML_path)
 
         for file in Config_file_list:
-            self.ReadConfigXML(file)
+            if file.text != None:
+                self.ReadConfigXML(file)
+                self.Global_Index_max += 1
+
+        self.initRules()
 
     def ReadMainXML(self, MainXML_path):
 
-        MainXMLHandler = MainXMLHandler('./SpiderControl.xml')
-        PageNodes = MainXMLHandler.find_nodes('PageFiles/PageFile')
+        XMLHandler = MainXMLHandler('./SpiderControl.xml')
+        PageNodes = XMLHandler.find_nodes('PageFiles/PageFile')
 
         Config_file_list = []
         for Node in PageNodes:
@@ -168,75 +173,78 @@ class CcgpSpider(CrawlSpider):
 
     def ReadConfigXML(self, Config_file):
 
-        if Config_file.text != None:
+        ParaXMLHandler = ParameterXMLHandler(Config_file.text)
 
-            ParaXMLHandler = ParameterXMLHandler(Config_file.text)
+        Frequency = ParaXMLHandler.find_nodes('Frequency')
+        self.Frequency_list.append(int(Frequency[0].text))
 
-            Frequency = ParaXMLHandler.find_nodes('Frequency')
-            self.Frequency_list.append(int(Frequency[0]).text)
+        PageUrl = ParaXMLHandler.find_nodes('PageUrl')
+        self.PageUrl_list.append(PageUrl[0].text)
 
-            PageUrl = ParaXMLHandler.find_nodes('PageUrl')
-            self.PageUrl_list.append(PageUrl[0].text)
+        PageAllowDomains = ParaXMLHandler.find_nodes('PageAllowDomains')
+        self.allowed_domains.append(PageAllowDomains[0].text)
 
-            PageAllowDomains = ParaXMLHandler.find_nodes('PageAllowDomains')
-            self.allowed_domains.append(PageAllowDomains[0].text)
+        PageAllowDomainsRE = ParaXMLHandler.find_nodes('PageAllowDomainsRE')
+        self.PageAllowDomainsRE_list.append(PageAllowDomainsRE[0].text)
 
-            PageAllowDomainsRE = ParaXMLHandler.find_nodes('PageAllowDomainsRE')
-            self.PageAllowDomainsRE_list.append(PageAllowDomainsRE[0].text)
+        PageStartUrl = ParaXMLHandler.find_nodes('PageStartUrl')
+        self.start_urls.append(PageStartUrl[0].text)
 
-            PageStartUrl = ParaXMLHandler.find_nodes('PageStartUrl')
-            self.start_urls.append(PageStartUrl[0].text)
+        PageRule_allow = ParaXMLHandler.find_nodes('PageRule_allow')
+        self.PageRule_allow_list.append(PageRule_allow[0].text)
 
-            PageRule_allow = ParaXMLHandler.find_nodes('PageRule_allow')
-            self.PageRule_allow_list.append(PageRule_allow[0].text)
+        BrowserDriverPath = ParaXMLHandler.find_nodes('BrowserDriverPath')
+        self.BrowserDriverPath_list.append(BrowserDriverPath[0].text)
 
-            BrowserDriverPath = ParaXMLHandler.find_nodes('BrowserDriverPath')
-            self.BrowserDriverPath_list.append(BrowserDriverPath[0].text)
+        ContentUrl = ParaXMLHandler.find_nodes('XPath/TitlePage/ContentUrl')
+        self.ContentUrl_list.append(ContentUrl[0].text)
 
-            ContentUrl = ParaXMLHandler.find_nodes('XPath/TitlePage/ContentUrl')
-            self.ContentUrl_list.append(ContentUrl[0].text)
+        NextPageUrl = ParaXMLHandler.find_nodes('XPath/TitlePage/NextPage')
+        self.NextPage_list.append(NextPageUrl[0].text)
 
-            NextPageUrl = ParaXMLHandler.find_nodes('XPath/TitlePage/NextPage')
-            self.NextPage_list.append(NextPageUrl[0].text)
+        ContentUrl = ParaXMLHandler.find_nodes('XPath/TitlePage/ContentUrl')
+        self.ContentUrl_list.append(ContentUrl[0].text)
 
-            ContentUrl = ParaXMLHandler.find_nodes('XPath/TitlePage/ContentUrl')
-            print(ContentUrl[0].text)
+        project_name = ParaXMLHandler.find_nodes('XPath/ContentPage/project_name')
+        self.project_name_list.append(project_name[0].text)
 
-            project_name = ParaXMLHandler.find_nodes('XPath/ContentPage/project_name')
-            print(project_name[0].text)
+        project_category = ParaXMLHandler.find_nodes('XPath/ContentPage/project_category')
+        self.project_category_list.append(project_category[0].text)
 
-            project_category = ParaXMLHandler.find_nodes('XPath/ContentPage/project_category')
-            print(project_category[0].text)
+        project_apartment = ParaXMLHandler.find_nodes('XPath/ContentPage/project_apartment')
+        self.project_apartment_list.append(project_apartment[0].text)
 
-            project_apartment = ParaXMLHandler.find_nodes('XPath/ContentPage/project_apartment')
-            print(project_apartment[0].text)
+        project_location = ParaXMLHandler.find_nodes('XPath/ContentPage/project_location')
+        self.project_location_list.append(project_location[0].text)
 
-            project_location = ParaXMLHandler.find_nodes('XPath/ContentPage/project_location')
-            print(project_location[0].text)
+        project_publish_time = ParaXMLHandler.find_nodes('XPath/ContentPage/project_publish_time')
+        self.project_publish_time_list.append(project_publish_time[0].text)
 
-            project_publish_time = ParaXMLHandler.find_nodes('XPath/ContentPage/project_publish_time')
-            print(project_publish_time[0].text)
+        project_file_time = ParaXMLHandler.find_nodes('XPath/ContentPage/project_file_time')
+        self.project_file_time_list.append(project_file_time[0].text)
 
-            project_file_time = ParaXMLHandler.find_nodes('XPath/ContentPage/project_file_time')
-            print(project_file_time[0].text)
+        project_file_price = ParaXMLHandler.find_nodes('XPath/ContentPage/project_file_price')
+        self.project_file_price_list.append(project_file_price[0].text)
 
-            project_file_price = ParaXMLHandler.find_nodes('XPath/ContentPage/project_file_price')
-            print(project_file_price[0].text)
+        project_bit_time = ParaXMLHandler.find_nodes('XPath/ContentPage/project_bit_time')
+        self.project_bit_time_list.append(project_bit_time[0].text)
 
-            project_bit_time = ParaXMLHandler.find_nodes('XPath/ContentPage/project_bit_time')
-            print(project_bit_time[0].text)
+        project_bit_location = ParaXMLHandler.find_nodes('XPath/ContentPage/project_bit_location')
+        self.project_bit_location_list.append(project_bit_location[0].text)
 
-            project_bit_location = ParaXMLHandler.find_nodes('XPath/ContentPage/project_bit_location')
-            print(project_bit_location[0].text)
+        project_except_amount = ParaXMLHandler.find_nodes('XPath/ContentPage/project_except_amount')
+        self.project_except_amount_list.append(project_except_amount[0].text)
 
-            project_except_amount = ParaXMLHandler.find_nodes('XPath/ContentPage/project_except_amount')
-            print(project_except_amount[0].text)
+        project_manager = ParaXMLHandler.find_nodes('XPath/ContentPage/project_manager')
+        self.project_manager_list.append(project_manager[0].text)
 
-            project_manager = ParaXMLHandler.find_nodes('XPath/ContentPage/project_manager')
-            print(project_manager[0].text)
+        project_manager_tel = ParaXMLHandler.find_nodes('XPath/ContentPage/project_manager_tel')
+        self.project_manager_tel_list.append(project_manager_tel[0].text)
 
-            project_manager_tel = ParaXMLHandler.find_nodes('XPath/ContentPage/project_manager_tel')
-            print(project_manager_tel[0].text)
+    def initRules(self):
+        for i in range(self.Global_Index_max):
+            self.rules.append(Rule(LinkExtractor(allow = self.PageRule_allow_list[i]),
+             callback='parse_item', follow=False))
 
 
 

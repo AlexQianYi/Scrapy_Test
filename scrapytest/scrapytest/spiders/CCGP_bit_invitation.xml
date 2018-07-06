@@ -10,7 +10,7 @@
 
 	<PageAllowDomains>"ccgp.gov.cn"</PageAllowDomains>
 
-	<PageAllowDomainsRE>"r'ccgp\.gov\.cn"</PageAllowDomainsRE>
+	<PageAllowDomainsRE>ccgp\.gov\.cn</PageAllowDomainsRE>
 
 	<PageStartUrl>"http://www/ccgp.gov.cn/cggg/zyggg/gkzb"</PageStartUrl>
 

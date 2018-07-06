@@ -1,6 +1,6 @@
 from xml.etree.ElementTree import ElementTree, Element
 
-from MainXMLHandler import MainXMLHandler
+#from MainXMLHandler import MainXMLHandler
 
 class ParameterXMLHandler():
 
@@ -33,6 +33,7 @@ class ParameterXMLHandler():
         return node.findall(path)
 
 
+"""
 if __name__ == "__main__":
 
     MainXMLHandler = MainXMLHandler('./SpiderControl.xml')
@@ -113,6 +114,7 @@ if __name__ == "__main__":
 
             project_manager_tel = ParaXMLHandler.find_nodes('XPath/ContentPage/project_manager_tel')
             print(project_manager_tel[0].text)
+"""
 
 
 
