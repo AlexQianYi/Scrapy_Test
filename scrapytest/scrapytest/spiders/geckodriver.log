@@ -787,3 +787,53 @@ See /usr/include/servers/bootstrap_defs.h for the error codes.
 2018-07-06 15:28:12.107 plugin-container[29725:4274172] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x7b03, name = 'com.apple.coredrag'
 See /usr/include/servers/bootstrap_defs.h for the error codes.
 *** UTM:SVC TimerManager:registerTimer called after profile-before-change notification. Ignoring timer registration for id: telemetry_modules_ping
+2018-07-07 05:39:26.139 plugin-container[29069:3853633] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-07 05:39:26.140 plugin-container[29461:4106936] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-07 05:39:26.140 plugin-container[23041:2554884] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-07 05:39:26.140 plugin-container[29460:4106733] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-07 05:39:26.140 plugin-container[22544:2366183] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-07 08:44:38.981 plugin-container[22544:2366183] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-07 08:44:38.983 plugin-container[23041:2554884] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-07 08:44:38.994 plugin-container[29069:3853633] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-07 08:44:38.996 plugin-container[29461:4106936] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-07 08:44:39.008 plugin-container[29460:4106733] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-08 05:39:50.002 plugin-container[22544:2366183] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-08 05:39:50.004 plugin-container[23041:2554884] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-08 05:39:50.010 plugin-container[29069:3853633] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-08 05:39:50.012 plugin-container[29460:4106733] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-08 05:39:50.014 plugin-container[29461:4106936] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-08 08:54:52.506 plugin-container[22544:2366183] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-08 08:54:52.511 plugin-container[23041:2554884] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-08 08:54:52.513 plugin-container[29069:3853633] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-08 08:54:52.516 plugin-container[29461:4106936] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-08 08:54:52.520 plugin-container[29460:4106733] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-08 16:11:21.555 firefox-bin[22542:2365982] IMKInputSession [0x12436bb80 presentFunctionRowItemTextInputViewWithEndpoint:completionHandler:] : [self textInputContext]=0x12430e2e0 *NO* NSRemoteViewController to client, NSError=Error Domain=NSCocoaErrorDomain Code=4097 "connection from pid 0" UserInfo={NSDebugDescription=connection from pid 0}, com.apple.inputmethod.EmojiFunctionRowItem
+2018-07-08 16:11:21.579 firefox-bin[22542:2365982] IMKInputSession [0x12436bb80 presentFunctionRowItemTextInputViewWithEndpoint:completionHandler:] : [self textInputContext]=0x12430e2e0 *NO* NSRemoteViewController to client, NSError=Error Domain=NSCocoaErrorDomain Code=4097 "connection from pid 0" UserInfo={NSDebugDescription=connection from pid 0}, com.apple.inputmethod.EmojiFunctionRowItem
+2018-07-08 16:11:22.069 plugin-container[33613:5529128] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x7707, name = 'com.apple.tsm.portname'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2018-07-08 16:11:22.605 plugin-container[33613:5529128] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x8877, name = 'com.apple.coredrag'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2018-07-09 04:26:05.651 plugin-container[22544:2366183] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-09 04:26:05.655 plugin-container[23041:2554884] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-09 04:26:05.665 plugin-container[29069:3853633] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-09 04:26:05.671 plugin-container[29460:4106733] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-09 04:26:05.671 plugin-container[29461:4106936] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-09 04:26:05.682 plugin-container[33613:5529128] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-09 08:48:16.353 plugin-container[22544:2366183] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-09 08:48:16.361 plugin-container[29460:4106733] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-09 08:48:16.365 plugin-container[29069:3853633] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-09 08:48:16.369 plugin-container[33613:5529128] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-09 08:48:16.370 plugin-container[29461:4106936] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-09 08:48:16.378 plugin-container[23041:2554884] _mthid_copyDeviceInfo(144115188092633088) failed
+2018-07-09 08:50:59.655 firefox-bin[22542:2365982] IMKInputSession [0x12436bb80 presentFunctionRowItemTextInputViewWithEndpoint:completionHandler:] : [self textInputContext]=0x12430e2e0 *NO* NSRemoteViewController to client, NSError=Error Domain=NSCocoaErrorDomain Code=4097 "connection from pid 0" UserInfo={NSDebugDescription=connection from pid 0}, com.apple.inputmethod.EmojiFunctionRowItem
+2018-07-09 08:50:59.665 firefox-bin[22542:2365982] IMKInputSession [0x12436bb80 presentFunctionRowItemTextInputViewWithEndpoint:completionHandler:] : [self textInputContext]=0x12430e2e0 *NO* NSRemoteViewController to client, NSError=Error Domain=NSCocoaErrorDomain Code=4097 "connection from pid 0" UserInfo={NSDebugDescription=connection from pid 0}, com.apple.inputmethod.EmojiFunctionRowItem
+2018-07-09 08:51:17.771 firefox-bin[22542:2365982] IMKInputSession [0x12436bb80 presentFunctionRowItemTextInputViewWithEndpoint:completionHandler:] : [self textInputContext]=0x12430e2e0 *NO* NSRemoteViewController to client, NSError=Error Domain=NSCocoaErrorDomain Code=4097 "connection from pid 0" UserInfo={NSDebugDescription=connection from pid 0}, com.apple.inputmethod.EmojiFunctionRowItem
+2018-07-09 08:51:21.040 firefox-bin[22542:2365982] IMKInputSession [0x12436bb80 presentFunctionRowItemTextInputViewWithEndpoint:completionHandler:] : [self textInputContext]=0x12430e2e0 *NO* NSRemoteViewController to client, NSError=Error Domain=NSCocoaErrorDomain Code=4097 "connection from pid 0" UserInfo={NSDebugDescription=connection from pid 0}, com.apple.inputmethod.EmojiFunctionRowItem
+2018-07-09 08:51:26.698 firefox-bin[23039:2554507] IMKInputSession [0x126cee550 presentFunctionRowItemTextInputViewWithEndpoint:completionHandler:] : [self textInputContext]=0x10e9457c0 *NO* NSRemoteViewController to client, NSError=Error Domain=NSCocoaErrorDomain Code=4097 "connection from pid 0" UserInfo={NSDebugDescription=connection from pid 0}, com.apple.inputmethod.EmojiFunctionRowItem
+2018-07-09 08:51:27.124 plugin-container[33851:5547390] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x8633, name = 'com.apple.tsm.portname'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2018-07-09 08:51:27.214 plugin-container[33851:5547390] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x191f, name = 'com.apple.coredrag'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2018-07-09 08:51:28.159 firefox-bin[22542:2365982] IMKInputSession [0x12436bb80 presentFunctionRowItemTextInputViewWithEndpoint:completionHandler:] : [self textInputContext]=0x12430e2e0 *NO* NSRemoteViewController to client, NSError=Error Domain=NSCocoaErrorDomain Code=4097 "connection from pid 0" UserInfo={NSDebugDescription=connection from pid 0}, com.apple.inputmethod.EmojiFunctionRowItem
+2018-07-09 08:51:28.170 firefox-bin[22542:2365982] IMKInputSession [0x12436bb80 presentFunctionRowItemTextInputViewWithEndpoint:completionHandler:] : [self textInputContext]=0x12430e2e0 *NO* NSRemoteViewController to client, NSError=Error Domain=NSCocoaErrorDomain Code=4097 "connection from pid 0" UserInfo={NSDebugDescription=connection from pid 0}, com.apple.inputmethod.EmojiFunctionRowItem
+2018-07-09 08:51:48.342 firefox-bin[22542:2365982] IMKInputSession [0x12436bb80 presentFunctionRowItemTextInputViewWithEndpoint:completionHandler:] : [self textInputContext]=0x12430e2e0 *NO* NSRemoteViewController to client, NSError=Error Domain=NSCocoaErrorDomain Code=4097 "connection from pid 0" UserInfo={NSDebugDescription=connection from pid 0}, com.apple.inputmethod.EmojiFunctionRowItem
