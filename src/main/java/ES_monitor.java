@@ -30,6 +30,7 @@ import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
+import org.elasticsearch.index.query.FilterBuilder;
 import org.elasticsearch.index.query.FilterBuilders;
 import org.elasticsearch.index.query.MatchQueryBuilder.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -327,5 +328,26 @@ public class ES_monitor {
         for (SearchHit searchHit : hits2) {
             System.out.println(searchHit.getSourceAsString());
         }
+    }
+
+    /***
+     * Filter
+     * lt <
+     * gt >
+     * lte <=
+     * gte >=
+     */
+    @Test
+    public void testFilter() {
+        SearchResponse searchResponse = transportClient.prepareSearch(index).setTypes(type)
+                                            .setQuery(QueryBuilders.matchAllQuery())
+                                            .setSearchType(SearchType.QUERY_THEN_FETCH)
+                                            .setPostFilter(FilterBuilders.rangeFilter("age").gte(18).lte(22))
+                                            .setExplain(true)
+                                            .get();
+        SearchHits hits = searchResponse.getHits();
+
+        long totalHits = hits.getTotalHits();
+        System.out.println(totalHits);
     }
 }
