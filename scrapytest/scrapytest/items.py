@@ -45,7 +45,7 @@ class ScrapytestItem(scrapy.Item):
     crawl_time = scrapy.Field()
 
     # pass
-
+"""
     def save2es(self):
 
         lagou_type = LagouType()
@@ -88,5 +88,6 @@ class ScrapytestItem(scrapy.Item):
         print(_searched)
 
         return
+"""
 
 

@@ -1,6 +1,3 @@
-# Word type
-#from elasticsearch_dsl import DocType, Completion, Keyword, Text, Boolean, Integer, \
-#    Date, Nested, analyzer, InnerDoc
 
 from elasticsearch_dsl import Document, Completion, Keyword, Text, Boolean, Integer, \
     Date, Nested, analyzer, InnerDoc
@@ -48,16 +45,10 @@ class LagouType(Document):
 
     class Index:
 
-        name = 'lagou3'
+        name = 'original_project_file'
 
-    """
-    def save(self, ** kwargs):
-        self.lines = len(self.body.split())
-        return super(Lagou, self).save(** kwargs)
+        doc_type = 'project_file'
 
-    def is_published(self):
-        return datetime.now() > self.published_from
-    """
 
 if __name__ == '__main__':
     LagouType.init()

@@ -226,7 +226,7 @@ class CcgpSpider(CrawlSpider):
         self.project_file_price_list.append(project_file_price[0].text)
 
         project_file_location = ParaXMLHandler.find_nodes('XPath/ContentPage/project_file_location')
-        self.project_file_location_list.append(project_file_location[0])
+        self.project_file_location_list.append(project_file_location[0].text)
 
         project_bit_time = ParaXMLHandler.find_nodes('XPath/ContentPage/project_bit_time')
         self.project_bit_time_list.append(project_bit_time[0].text)
