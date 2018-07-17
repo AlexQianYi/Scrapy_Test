@@ -307,4 +307,25 @@ public class ES_monitor {
             System.out.println(searchHit.getSourceAsString());
         }
     }
+
+    /***
+     * multiple search
+     */
+    @Test
+    public void testSearchAndTimeout() {
+        SearchResponse searchResponse = transportClient.prepareSearch(index, "origin_project_file")
+                                            .setTypes(type, "teacher")
+                                            .setQuery(QueryBuilders.matchAllQuery())
+                                            .setSearchType(SearchType.QUERY_THEN_FETCH)
+                                            .setTimeout("3")
+                                            .get();
+        SearchHits hits = searchResponse.getHits();
+
+        long totalHits = hits.getTotalHits();
+        System.out.println(totalHits);
+        SearchHit[] hits2 = hits.getHits();
+        for (SearchHit searchHit : hits2) {
+            System.out.println(searchHit.getSourceAsString());
+        }
+    }
 }
