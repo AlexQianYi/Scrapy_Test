@@ -282,5 +282,29 @@ public class ES_monitor {
 
     /***
      * search index by prepareSearch
+     * setQuery(QueryBuilders.matchQuery("name", "jack"))
+     * setSearchType(SearchType.QUERY_THEN_FETCH)
      */
+    @Test
+    public void testSearch(){
+        SearchResponse searchResponse = transportClient.prepareSearch(index)
+                                            .setTypes(type)
+                                            // search all
+                                            // .setQuery(QueryBuilders.matchAllQuery())
+                                            .setQuery(QueryBuilders.matchQuery("name", "Avivi").operator(Operator.AND))
+                                            // search according to conditions
+                                            .setSearchType(SearchType.QUERY_THEN_FETCH)
+                                            .setFrom(0).setSize(10)
+                                            .addSort("age", SortOrder.DESC)
+                                            .get();
+
+        SearchHits hits = searchResponse.getHits();
+        long total = hits.getTotalHits();
+        System.out.println(total);
+
+        SearchHit[] searchHits = hits.hits();
+        for (SearchHit searchHit : searchHits) {
+            System.out.println(searchHit.getSourceAsString());
+        }
+    }
 }
