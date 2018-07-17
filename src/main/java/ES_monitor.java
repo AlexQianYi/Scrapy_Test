@@ -3,6 +3,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+
+import org.apache.lucene.analysis.miscellaneous.StemmerOverrideFilter;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.bulk.BulkItemResponse;
@@ -66,7 +68,117 @@ public class ES_monitor {
 
 
         /***
-         * 
+         * 2. create client
+         * by setting, default cluster name is elasticsearch
+         * tcp: 9300
          */
+        transportClient = new TransportClient(settings);
+        TransportAddress transportAddress = new InetSocketTransportAddress("192.168.1.200", 9300);
+        transportClient.addTransportAddress(transportAddress);
+
+        /***
+         * 3. get cluster information
+         */
+        ImmutableList<DiscoveryNode> connectedNodes = transportClient.connectedNodes();
+        for (DiscoveryNode discoveryNode : connectedNodes){
+            System.out.println(discoveryNode.getHostAddress());
+        }
+    }
+
+    /***
+     * get doc information by prepareGet
+     */
+    @Test
+    public void testGet(){
+        GetResponse getResponse = transportClient.prepareGet(index, type, "1").get();
+        System.out.println(getResponse.getSourceAsString());
+    }
+
+    /***
+     * update doc by prepareUpdate
+     * if doc not exist, return error
+     */
+    @Test
+    public void testUpdate() throws IOException{
+        XContentBuilder source = XContentFactory.jsonBuilder()
+                                    .startObject()
+                                    .field("name", "will")
+                                    .endObject();
+        UpdateResponse updateResponse = transportClient.prepareUpdate(index, type, "3")
+                                    .setDoc(source).get();
+        System.out.println(updateResponse.getVersion());
+
+    }
+
+
+    /***
+     * add doc by prepareIndex
+     * input parameter json
+     * update id at same time
+     */
+    @Test
+    public void testIndexJson(){
+        String source = "{\"name\":\"qill\",\"age\":33}";
+        IndexResponse indexResponse = transportClient.prepareIndex(index, type, "4")
+                                        .setSource(source).get();
+        System.out.println(indexResponse.getVersion());
+    }
+
+    /***
+     * add doc by prepareIndex
+     * input parameter Map<String, Object>
+     */
+    @Test
+    public void testIndexMap(){
+        Map<String, Object> source = new HashMap<String, Object>();
+        source.put("name", "Alice");
+        source.put("age", 18);
+        IndexResponse indexResponse = transportClient.prepareIndex(index, type, "5")
+                                        .setSource(source).get();
+        System.out.println(indexResponse.getVersion());
+    }
+
+    /***
+     * add doc by prepareIndex
+     * input parameter javaBean
+     * transfer javaBean as JSON
+     * if error, throw Exception
+     */
+    @Test
+    public void testIndexBean() throws JsonProcessingException{
+        Student stu = new Student();
+        stu.setName("Fresh");
+        stu.setAge(22);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String source = mapper.writeValueAsString(stu);
+
+        IndexResponse indexResponse = transportClient.prepareIndex(index, type, "6")
+                                        .setSource(source).get();
+
+        System.out.println(indexResponse.getVersion());
+
+    }
+
+    /***
+     * add doc by prepareIndex
+     * input parameter XContentBuilder
+     * throw IOException
+     * throw ExecutionException
+     * throw InterrputedException
+     */
+    @Test
+    public void testIndexBuilder() throws IOException, InterruptedException, ExecutionException {
+        XContentBuilder builder = XContentFactory.jsonBuilder()
+                                    .startObject()
+                                    .field("name", "Avivi")
+                                    .field("age", 30)
+                                    .endObject();
+
+        IndexResponse indexResponse = transportClient.prepareIndex(index, type, "7")
+                                    .setSource(builder)
+                                    .execute().get();
+
+        System.out.println(indexResponse.getVersion());
     }
 }
