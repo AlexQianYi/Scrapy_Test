@@ -235,6 +235,52 @@ public class ES_monitor {
     }
 
     /***
-     * 
+     * batching by prepareBulk
+     */
+    @Test
+    public void testBulk() throws IOException{
+        // 1. generate bulk
+        BulkRequestBuilder bulk = transportClient.prepareBulk();
+
+        // 2. add operation
+        IndexRequest add = new IndexRequest(index, type, "10");
+        add.source(XContentFactory.jsonBuilder()
+                .startObject()
+                .field("name", "Henrry")
+                .field("age", 28)
+                .endObject());
+
+        // 3. delete operation
+        DeleteRequest delete = new DeleteRequest(index, type,"4");
+
+        // 4. update operation
+        XContentBuilder source = XContentFactory.jsonBuilder()
+                                    .startObject()
+                                    .field("name", "jack")
+                                    .field("age", 17)
+                                    .endObject();
+        UpdateRequest update = new UpdateRequest(index, type, "8");
+        update.doc(source);
+
+        bulk.add(delete);
+        bulk.add(add);
+        bulk.add(update);
+
+        // 5. execute bathing operation
+        BulkResponse bulkResponse = bulk.get();
+        if(bulkResponse.hasFailures()){
+
+            BulkItemResponse[] items = bulkResponse.getItems();
+            for (BulkItemResponse item: items){
+                System.out.println(item.getFailureMessage());
+            }
+        }else {
+            System.out.println("all execute succeed!");
+        }
+
+    }
+
+    /***
+     * search index by prepareSearch
      */
 }
