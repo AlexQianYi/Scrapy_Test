@@ -350,4 +350,33 @@ public class ES_monitor {
         long totalHits = hits.getTotalHits();
         System.out.println(totalHits);
     }
+
+    /***
+     * highlight
+     */
+    @Test
+    public void testHighLight() {
+        SearchResponse searchResponse = transportClient.prepareSearch(index).setTypes(type)
+                                            .setQuery(QueryBuilders.matchQuery("name", "Fresh"))
+                                            .setSearchType(SearchType.QUERY_THEN_FETCH)
+                                            .addHighlightedField("name")
+                                            .setHighlighterPreTags("<font color='red'>")
+                                            .setHighlighterPostTags("</font>")
+                                            .get();
+
+        SearchHits hits = searchResponse.getHits();
+        long totalHits = hits.getTotalHits();
+        System.out.println(totalHits);
+
+        SearchHit[] hits2 = hits.getHits();
+        for (SearchHit searchHit : hits2){
+            Map<String, HighlightField> highlightFields = searchHit.getHighlightFields();
+            HighlightField highlightField = highlightFields.get("name");
+            if (null != highlightField) {
+                Text[] fragments = highlightField.fragments();
+                System.out.println(fragments[0]);
+            }
+            System.out.println(searchHit.getSourceAsString());
+        }
+    }
 }
