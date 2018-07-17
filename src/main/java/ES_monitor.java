@@ -32,6 +32,7 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.index.query.FilterBuilders;
 import org.elasticsearch.index.query.MatchQueryBuilder.Operator;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
@@ -181,4 +182,59 @@ public class ES_monitor {
 
         System.out.println(indexResponse.getVersion());
     }
+
+    /***
+     * add doc by prepareIndex
+     * input parameter key-value
+     */
+    @Test
+    public void testIndexDirect(){
+        IndexResponse indexResponse = transportClient.prepareIndex(index, type ,"8")
+                                        .setSource("name", "GAGA", "age", 35).get();
+        System.out.println(indexResponse.getVersion());
+    }
+
+    /***
+     * delete doc by prepareIndex
+     */
+    @Test
+    public void testDelete(){
+        DeleteResponse deleteResponse = transportClient.prepareDelete(index, type, "9").get();
+        System.out.println(deleteResponse.getVersion());
+
+        // delete all records
+        DeleteByQueryResponse deleteByQueryResponses = transportClient.prepareDeleteByQuery(index)
+                                                        .setTypes(type)
+                                                        .setQuery(QueryBuilders.matchAllQuery())
+                                                        .set();
+        System.out.println(deleteByQueryResponses.contextSize());
+        System.out.println(deleteByQueryResponses.isContextEmpty());    //true
+        System.out.println(deleteByQueryResponses.status().getStatus());
+
+    }
+
+    /***
+     * delete index lib
+     * CANNOT REVERSE!!!
+     * CAREFUL!!
+     */
+    @Test
+    public void testDeleteIndex(){
+        DeleteIndexResponse deleteIndexResponse = transportClient.admin().indices()
+                                                    .prepareDelete("original_project_file").get();
+        System.out.println(deleteIndexResponse.isContextEmpty());
+    }
+
+    /***
+     * get doc number by prepareCount
+     */
+    @Test
+    public void testCount(){
+        long count = transportClient.prepareCount(index).get().getCount();
+        System.out.println(count);
+    }
+
+    /***
+     * 
+     */
 }
