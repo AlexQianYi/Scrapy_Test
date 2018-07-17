@@ -397,5 +397,23 @@ public class ES_monitor {
         }
     }
 
-    
+    /***
+     * aggregation: sum
+     */
+    @Test
+    public void testAggregationFunction() {
+        SearchResponse searchResponse = transportClient.prepareSearch(index).setTypes(type)
+                                            .setQuery(QueryBuilders.matchQuery())
+                                            .setSearchType(SearchType.QUERY_THEN_FETCH)
+                                            .addAggregation(AggregationBuilders.terms("group_name").field("name")
+                                                    .subAggregation(AggregationBuilders.sum("sum_age").field("age")))
+                                            .get();
+
+        Terms terms = searchResponse.getAggregations().get("group_name");
+        List<Bucket> buckets = terms.getBuckets();
+        for (Bucket bucket : buckets) {
+            Sum sum = bucket.getAggregations().get("sum_age");
+            System.out.println(bucket.getKey() + " " + bucket.getDocCount() + " " +sum.getValue());
+        }
+    }
 }
