@@ -379,4 +379,23 @@ public class ES_monitor {
             System.out.println(searchHit.getSourceAsString());
         }
     }
+
+    /***
+     * group
+     */
+    @Test
+    public void testGroupBy() {
+        SearchResponse searchResponse = transportClient.prepareSearch(index)
+                                            .setQuery(QueryBuilders.matchAllQuery())
+                                            .setSearchType(SearchType.QUERY_THEN_FETCH)
+                                            .addAggregation(AggregationBuilders.terms("group_age").field("age").size(0))
+                                            .get();
+        Terms terms = searchResponse.getAggregations().get("group_age");
+        List<Bucket> buckets = terms.getBuckets();
+        for (Bucket bucket : buckets) {
+            System.out.println(bucket.getKey() + " " + bucket.getDocCount());
+        }
+    }
+
+    
 }
