@@ -75,3 +75,4 @@ java.lang.IllegalArgumentException: mapper [project_name] of different type, cur
 [2018-07-17T11:46:43,496][INFO ][o.e.x.m.a.TransportDeleteExpiredDataAction] [master1_flitered] Deleting expired data
 [2018-07-17T11:46:43,671][INFO ][o.e.x.m.a.TransportDeleteExpiredDataAction] [master1_flitered] Completed deletion of expired data
 [2018-07-17T11:46:43,672][INFO ][o.e.x.m.MlDailyMaintenanceService] Successfully completed [ML] maintenance tasks
+[2018-07-17T21:39:00,391][INFO ][o.e.m.j.JvmGcMonitorService] [master1_flitered] [gc][45514] overhead, spent [255ms] collecting in the last [1s]

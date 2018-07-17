@@ -416,4 +416,85 @@ public class ES_monitor {
             System.out.println(bucket.getKey() + " " + bucket.getDocCount() + " " +sum.getValue());
         }
     }
+
+    /***
+     * generate original_project_file data
+     * throws IOException
+     * throws ExecutionException
+     * throws InterruptedException
+     */
+    @Test
+    public void generateOtherIndexData() throws IOException {
+
+        for (int i=25; i<60; i++){
+            XContentBuilder builder = XContentFactory.jsonBuilder()
+                    .startObject()
+                    .field("name", "Teacher"+i)
+                    .field("age", i+1)
+                    .endObject();
+            transportClient.prepareIndex("original_project_file", "teacher", String.valueOf(i-24))
+                                            .setSource(builder)
+                                            .get();
+        }
+    }
+
+    /***
+     * generate data
+     * throws IOException
+     * throws ExecutionException
+     * throws InterruptedException
+     */
+    @Test
+    public void generateData() throws IOException {
+        for (int i=0; i<60; i++) {
+            XContentBuilder builder = XContentFactory.jsonBuilder()
+                    .startObject()
+                    .field("name", "Avivi"+i)
+                    .field("age", i+1)
+                    .endObject();
+            transportClient.prepareIndex(index, type, String.valueOf(i+11))
+                                            .setSource(builder)
+                                            .get();
+        }
+    }
+
+    /***
+     * java operate settings and mappings
+     * throws IOException
+     */
+    @Test
+    public void testSettingsMappings() throws IOException {
+        // 1.settings
+        HashMap<String, Object> settings_map = new HashMap<String, Object>();
+        settings_map.put("number_of_shards", 3);
+        settings_map.put("number_of_replicas", 1);
+
+        // 2.mappings
+        XContentBuilder builder = XContentFactory.jsonBuilder()
+                .startObject()
+                    .field("dynamic", "student")
+                    .startObject("properties")
+                        .startObject("id")
+                            .field("type", "integer")
+                            .field("store", "yes")
+                        .endObject()
+                        .startObject("name")
+                            .field("type", "string")
+                            .field("store", "yes")
+                            .field("index", "analyzed")
+                            .field("analyzer", "id")
+                        .endObject()
+                    .endObject()
+                .endObject();
+
+        CreateIndexRequestBuilder prepareCreate = transportClient.admin().indices().prepareCreate("java_es_test");
+        prepareCreate.setSettings(settings_map).addMapping("student", builder).execute().actionGet();
+
+    }
+
+    /***
+     * specific slice
+     *
+     *  
+     */
 }

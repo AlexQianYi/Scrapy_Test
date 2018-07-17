@@ -2,6 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05b2e52b-e95c-4da2-bee8-16dbf6b54592" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/0/translog/translog-1.ckp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/0/translog/translog-1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/0/translog/translog-2.ckp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/0/translog/translog-2.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/0/translog/translog.ckp" beforeDir="false" afterPath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/0/translog/translog.ckp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/1/translog/translog-1.ckp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/1/translog/translog-1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/1/translog/translog-2.ckp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/1/translog/translog-2.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/1/translog/translog.ckp" beforeDir="false" afterPath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/1/translog/translog.ckp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/2/translog/translog-1.ckp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/2/translog/translog-1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/2/translog/translog-2.ckp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/2/translog/translog-2.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/2/translog/translog.ckp" beforeDir="false" afterPath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/2/translog/translog.ckp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/3/translog/translog-1.ckp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/3/translog/translog-1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/3/translog/translog-2.ckp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/3/translog/translog-2.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/3/translog/translog.ckp" beforeDir="false" afterPath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/3/translog/translog.ckp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/4/translog/translog-1.ckp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/4/translog/translog-1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/4/translog/translog-2.ckp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/4/translog/translog-2.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/4/translog/translog.ckp" beforeDir="false" afterPath="$PROJECT_DIR$/ES_Fliter/ES_master1/data/nodes/0/indices/xRXVCQ-sTqi503q2ngzGSw/4/translog/translog.ckp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ES_monitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ES_monitor.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -27,11 +52,12 @@
       <file leaf-file-name="ES_monitor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ES_monitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="596">
-              <caret line="415" column="99" selection-start-line="415" selection-start-column="99" selection-end-line="415" selection-end-column="99" />
+            <state relative-caret-position="393">
+              <caret line="497" column="8" selection-start-line="497" selection-start-column="8" selection-end-line="497" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4974#4990#0" expanded="true" />
+                <element signature="e#17687#17703#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -858,10 +884,11 @@
       <path value="$PROJECT_DIR$/ES_Fliter/elasticsearch-head-master/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="842" />
-    <option name="width" value="838" />
-    <option name="height" value="1050" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="802" />
+    <option name="y" value="61" />
+    <option name="width" value="1400" />
+    <option name="height" value="987" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -975,15 +1002,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1531810180846</updated>
-      <workItem from="1531810187224" duration="8676000" />
+      <workItem from="1531810187224" duration="13174000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8676000" />
+    <option name="totallyTimeSpent" value="13174000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="842" y="0" width="838" height="1050" extended-state="0" />
+    <frame x="802" y="61" width="1400" height="987" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" />
@@ -991,7 +1018,7 @@
       <window_info anchor="right" id="Palette&#9;" />
       <window_info id="Image Layers" />
       <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" visible="true" weight="0.3016032" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" visible="true" weight="0.32968238" />
       <window_info anchor="right" id="Maven Projects" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -999,7 +1026,7 @@
       <window_info anchor="bottom" id="Terminal" />
       <window_info id="Capture Tool" />
       <window_info id="Designer" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18973747" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11357143" />
       <window_info anchor="right" id="Database" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -1036,11 +1063,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ES_monitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="415" column="99" selection-start-line="415" selection-start-column="99" selection-end-line="415" selection-end-column="99" />
+        <state relative-caret-position="393">
+          <caret line="497" column="8" selection-start-line="497" selection-start-column="8" selection-end-line="497" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4974#4990#0" expanded="true" />
+            <element signature="e#17687#17703#0" expanded="true" />
           </folding>
         </state>
       </provider>
