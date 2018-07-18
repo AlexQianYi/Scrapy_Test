@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.cluster.node.DiscoveryNode;
 import org.elasticsearch.common.collect.ImmutableList;
@@ -56,7 +58,7 @@ public class ES_monitor {
     String index = "original_project_file";
 
     // type name
-    String type = "project_file";
+    String type = "doc";
 
     @Before
     public void before(){
@@ -64,27 +66,35 @@ public class ES_monitor {
          * 1. configure clusters by setting
          */
         Settings settings = ImmutableSettings.settingsBuilder()
-                .put("cluster.name", "elasticsearch") // clusters name
+                .put("cluster.name", "Bit_Project") // clusters name
                 .put("client.transport.sniff", true) // sniff function
                 .build();
 
 
+
         /***
          * 2. create client
-         * by setting, default cluster name is elasticsearch
          * tcp: 9300
          */
+        System.out.println(0000);
         transportClient = new TransportClient(settings);
-        TransportAddress transportAddress = new InetSocketTransportAddress("192.168.1.200", 9300);
+        System.out.println(1111);
+        TransportAddress transportAddress = new InetSocketTransportAddress("127.0.0.1", 9300);
+        System.out.println(2222);
         transportClient.addTransportAddress(transportAddress);
+
+        System.out.println(3333);
 
         /***
          * 3. get cluster information
          */
         ImmutableList<DiscoveryNode> connectedNodes = transportClient.connectedNodes();
         for (DiscoveryNode discoveryNode : connectedNodes){
+            System.out.println(5);
             System.out.println(discoveryNode.getHostAddress());
         }
+
+        System.out.println(333333);
     }
 
     /***
@@ -92,6 +102,7 @@ public class ES_monitor {
      */
     @Test
     public void testGet(){
+        System.out.println(55555);
         GetResponse getResponse = transportClient.prepareGet(index, type, "1").get();
         System.out.println(getResponse.getSourceAsString());
     }
@@ -221,8 +232,9 @@ public class ES_monitor {
      */
     @Test
     public void testDeleteIndex(){
+        System.out.println(666666);
         DeleteIndexResponse deleteIndexResponse = transportClient.admin().indices()
-                                                    .prepareDelete("original_project_file").get();
+                                                    .prepareDelete("java_es_test1").get();
         System.out.println(deleteIndexResponse.isContextEmpty());
     }
 
@@ -314,7 +326,7 @@ public class ES_monitor {
      */
     @Test
     public void testSearchAndTimeout() {
-        SearchResponse searchResponse = transportClient.prepareSearch(index, "origin_project_file")
+        SearchResponse searchResponse = transportClient.prepareSearch(index, "java_es_test2")
                                             .setTypes(type, "teacher")
                                             .setQuery(QueryBuilders.matchAllQuery())
                                             .setSearchType(SearchType.QUERY_THEN_FETCH)
@@ -432,7 +444,7 @@ public class ES_monitor {
                     .field("name", "Teacher"+i)
                     .field("age", i+1)
                     .endObject();
-            transportClient.prepareIndex("original_project_file", "teacher", String.valueOf(i-24))
+            transportClient.prepareIndex("java_es_test2", "teacher", String.valueOf(i-24))
                                             .setSource(builder)
                                             .get();
         }
@@ -487,7 +499,7 @@ public class ES_monitor {
                     .endObject()
                 .endObject();
 
-        CreateIndexRequestBuilder prepareCreate = transportClient.admin().indices().prepareCreate("java_es_test");
+        CreateIndexRequestBuilder prepareCreate = transportClient.admin().indices().prepareCreate("java_es_test4");
         prepareCreate.setSettings(settings_map).addMapping("student", builder).execute().actionGet();
 
     }
@@ -589,4 +601,5 @@ public class ES_monitor {
             this.info = info;
         }
     }
+
 }
