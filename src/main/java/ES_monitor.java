@@ -56,7 +56,7 @@ public class ES_monitor {
     String index = "original_project_file";
 
     // type name
-    String name = "project_file";
+    String type = "project_file";
 
     @Before
     public void before(){
@@ -207,7 +207,7 @@ public class ES_monitor {
         DeleteByQueryResponse deleteByQueryResponses = transportClient.prepareDeleteByQuery(index)
                                                         .setTypes(type)
                                                         .setQuery(QueryBuilders.matchAllQuery())
-                                                        .set();
+                                                        .get();
         System.out.println(deleteByQueryResponses.contextSize());
         System.out.println(deleteByQueryResponses.isContextEmpty());    //true
         System.out.println(deleteByQueryResponses.status().getStatus());
@@ -403,7 +403,7 @@ public class ES_monitor {
     @Test
     public void testAggregationFunction() {
         SearchResponse searchResponse = transportClient.prepareSearch(index).setTypes(type)
-                                            .setQuery(QueryBuilders.matchQuery())
+                                            .setQuery(QueryBuilders.matchAllQuery())
                                             .setSearchType(SearchType.QUERY_THEN_FETCH)
                                             .addAggregation(AggregationBuilders.terms("group_name").field("name")
                                                     .subAggregation(AggregationBuilders.sum("sum_age").field("age")))
@@ -494,7 +494,99 @@ public class ES_monitor {
 
     /***
      * specific slice
-     *
-     *  
      */
+    @Test
+    public void testPreference(){
+        SearchResponse searchResponse = transportClient.prepareSearch(index)
+                .setTypes(type)
+                .setPreference("_shards:0")
+                .setQuery(QueryBuilders.matchAllQuery()).setExplain(true).get();
+
+        SearchHits hits = searchResponse.getHits();
+        System.out.println(hits.getTotalHits());
+        SearchHit[] hits2 = hits.getHits();
+        for(SearchHit h: hits2) {
+            System.out.println(h.getSourceAsString());
+        }
+    }
+
+    /***
+     * optimize
+     * combine index fragments
+     */
+    @Test
+    public void testOptimize(){
+        transportClient.admin().indices().prepareOptimize("java_es_test1", "java_es_test2")
+                .setMaxNumSegments(1).get();
+    }
+
+
+    /***
+     * delete .del file
+     */
+    @Test
+    public void testOptimizeDel() {
+        transportClient.admin().indices().prepareOptimize("java_es_test1", "java_es_test2")
+                .setOnlyExpungeDeletes(true).get();
+    }
+
+    /***
+     * route parameter
+     */
+    @Test
+    public void testRoutingInsert() {
+        String source  = "{\"name\":\"中山大学1\",\"num\":1800}";
+        IndexResponse indexResponse = transportClient.prepareIndex(index, "stu")
+                .setRouting("student")
+                .setSource(source).get();
+        System.out.println(indexResponse.getVersion());
+    }
+
+    @Test
+    public void testRoutingSearch() {
+        SearchResponse searchResponse = transportClient.prepareSearch(index)
+                .setTypes("stu")
+                .setQuery(QueryBuilders.matchAllQuery())
+                .setRouting("student", "teacher")
+                .get();
+
+        SearchHits hits = searchResponse.getHits();
+        SearchHit[] hits2 = hits.getHits();
+        for(SearchHit h : hits2) {
+            System.out.println(h.getSourceAsString());
+        }
+    }
+
+    public class Student {
+
+        private String name;
+
+        private int age;
+
+        private String info;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name){
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        private String getInfo() {
+            return info;
+        }
+
+        private void setInfo(String info) {
+            this.info = info;
+        }
+    }
 }
