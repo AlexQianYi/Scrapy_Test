@@ -110,4 +110,83 @@ public class QueryRule {
         return this.project_file_time[n];
     }
 
+    public void setProject_file_priceSize(int n){
+        this.project_file_price = new String[n];
+    }
+
+    public int getProject_file_priceSize(){
+        return this.project_file_price.length;
+    }
+
+    public void setProject_file_price(int n, String content){
+        this.project_file_price[n] = content;
+    }
+
+    public String getProject_file_price(int n){
+        return this.project_file_price[n];
+    }
+
+    public void setProject_file_locationSize(int n){
+        this.project_file_location = new String[n];
+    }
+
+    public int getProject_file_locationSize(){
+        return this.project_file_location.length;
+    }
+
+    public void setProject_file_location(int n, String content){
+        this.project_file_location[n] = content;
+    }
+
+    public String getProject_file_location(int n){
+        return this.project_file_location[n];
+    }
+
+    public void setProject_bit_timeSize(int n){
+        this.project_bit_time = new String[n];
+    }
+
+    public int getProject_bit_timeSize(){
+        return this.project_bit_time.length;
+    }
+
+    public void setProject_bit_time(int n, String content){
+        this.project_bit_time[n] = content;
+    }
+
+    public String getProject_bit_time(int n){
+        return this.project_bit_time[n];
+    }
+
+    public void setProject_bit_locationSize(int n){
+        this.project_bit_location = new String[n];
+    }
+
+    public int getProject_bit_locationSize(){
+        return this.project_bit_location.length;
+    }
+
+    public void setProject_bit_location(int n, String content){
+        this.project_bit_location[n] = content;
+    }
+
+    public String getProject_bit_location(int n){
+        return this.project_bit_location[n];
+    }
+
+    public void setProject_except_amountSize(int n){
+        this.project_except_amount = new String[n];
+    }
+
+    public int getProject_except_amountSize(){
+        return this.project_except_amount.length;
+    }
+
+    public void setProject_except_amount(int n, String content){
+        this.project_except_amount[n] = content;
+    }
+
+    public String getProject_except_amount(int n){
+        return this.project_except_amount[n];
+    }
 }
