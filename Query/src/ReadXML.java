@@ -29,8 +29,13 @@ public class ReadXML {
 
         document = db.parse(fileName);
 
-        NodeList ruleList = document.getElementsByTagName()
+        NodeList ruleList = document.getElementsByTagName("")
 
+        QueryRule rule = new QueryRule();
+
+
+
+        NodeList ruleList = document.getElementsByTagName()
 
     }
 

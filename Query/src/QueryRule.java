@@ -189,4 +189,37 @@ public class QueryRule {
     public String getProject_except_amount(int n){
         return this.project_except_amount[n];
     }
+
+    public void setProject_managerSize(int n){
+        this.project_manager = new String[n];
+    }
+
+    public int getProject_managerSize(){
+        return this.project_manager.length;
+    }
+
+    public void setProject_manager(int n, String content){
+        this.project_manager[n] = content;
+    }
+
+    public String getProject_manager(int n){
+        return this.project_manager[n];
+    }
+
+    public void setProject_manager_telSize(int n){
+        this.project_manager_tel = new String[n];
+    }
+
+    public int getProject_manager_telSize(){
+        return this.project_manager_tel.length;
+    }
+
+    public void setProject_manager_tel(int n, String content){
+        this.project_manager_tel[n] = content;
+    }
+
+    public String getProject_manager_tel(int n){
+        return this.project_manager_tel[n];
+    }
+
 }
