@@ -14,7 +14,7 @@ import re
 
 import xml.sax
 
-from .MainXMLHandler import MainXMLHandler
+from .MainXMLHandler import MainXMLHandle
 from .ParameterXMLHandler import ParameterXMLHandler
 
 
@@ -164,7 +164,7 @@ class CcgpSpider(CrawlSpider):
 
     def ReadMainXML(self, MainXML_path):
 
-        XMLHandler = MainXMLHandler('./SpiderControl.xml')
+        XMLHandler = MainXMLHandle('./SpiderControl.xml')
         PageNodes = XMLHandler.find_nodes('PageFiles/PageFile')
 
         Config_file_list = []
@@ -177,8 +177,8 @@ class CcgpSpider(CrawlSpider):
 
         ParaXMLHandler = ParameterXMLHandler(Config_file.text)
 
-        Frequency = ParaXMLHandler.find_nodes('Frequency')
-        self.Frequency_list.append(int(Frequency[0].text))
+        #Frequency = ParaXMLHandler.find_nodes('Frequency')
+        #self.Frequency_list.append(int(Frequency[0].text))
 
         PageUrl = ParaXMLHandler.find_nodes('PageUrl')
         self.PageUrl_list.append(PageUrl[0].text)

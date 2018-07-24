@@ -1,6 +1,6 @@
 from xml.etree.ElementTree import ElementTree, Element
 
-class MainXMLHandler():
+class MainXMLHandle():
 
     def __init__(self, MainXML_path):
         self.tree = self.read_xml(MainXML_path)

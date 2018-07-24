@@ -4,8 +4,6 @@
 
 	<PageID>1</PageID>
 
-	<Frequency>300</Frequency>
-
 	<PageUrl>"http://www.ccgp.gov.cn/cggg/zygg/gkzb/"</PageUrl>
 
 	<PageAllowDomains>"ccgp.gov.cn"</PageAllowDomains>
