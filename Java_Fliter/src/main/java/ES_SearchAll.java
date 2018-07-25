@@ -164,6 +164,12 @@ public class ES_SearchAll {
         return changedRecord;
     }
 
+    /***
+     * TODO: change how to filter record here
+     * @param tempRecord
+     * @param key
+     * @return
+     */
     private ProRecord CorrectRecord(ProRecord tempRecord, String key){
 
         System.out.println("--------------------");

@@ -15,8 +15,8 @@ elasticsearch_dsl
 
 selenium
 
-## 2.1 使用
-### 2.1.1 主配置文件
+## 1.3 使用
+### 1.3.1 主配置文件
 
 主配置文件**SpiderControl.xml**保存了每个爬虫单例的配置文件名，每个爬虫运行间隔时间，爬虫运行的指令。
 
@@ -24,7 +24,7 @@ selenium
 	<Frequency> 每个爬虫运行时间间隔
 	<cmd> 每个爬虫运行的指令 "scrapy crawl" + 爬虫名
 
-### 2.1.2 爬虫配置文件
+### 1.3.2 爬虫配置文件
 
 爬虫配置文件**CCGP\_bit_invitation.xml**保存了爬虫的目标url，起始url，所需要爬取元素的xpath等信息。
 
@@ -52,7 +52,7 @@ selenium
 	<project_manager> 项目负责人
 	<project_manager_tel> 项目负责人电话
 	
-### 2.2 创建新爬虫
+### 1.4 创建新爬虫
 	
 复制ccgp.py，并修改爬虫类名和爬虫名为test
 
@@ -70,7 +70,7 @@ selenium
 	
 执行**StartSpider.py**，执行前需启动ElasticSearch
 
-### 2.3 ElasticSearch创建
+### 1.5 ElasticSearch创建
 
 执行**EsModel.py**
 
@@ -82,24 +82,24 @@ selenium
 
 	doc_type = 'project_file' -> doc_type = 'doc'
 
-### 2.4 拓展（修改爬取内容）
-#### 2.4.1 修改**items.py**
+### 1.6 拓展（修改爬取内容）
+#### 1.6.1 修改**items.py**
 
 **items.py**中定义了爬虫所需要爬取的所有元素的key。
 
-#### 2.4.2 修改**EsModel.py**
+#### 1.6.2 修改**EsModel.py**
 
 **EsModel.py**中定义了每个key在ES中的保存方式（中文分词ik在这里添加），是否分词，是否定义为关键词等。
 
-#### 2.4.3 修改**pipelines.py**
+#### 1.6.3 修改**pipelines.py**
 
 **pipelines.py**中首先会实例化一个ES，然后将之前在items.py中定义的所爬取到的key存入到对应的ES中的位置。访问爬虫所爬取到的内容类似于HashMap.
 	
 	"ES中对应的字段“ = item[key]
 	
-#### 2.4.4 修改爬虫配置文件**test.xml**
+#### 1.6.4 修改爬虫配置文件**test.xml**
 在**test.xml**添加修改待爬取信息的xpath
-#### 2.4.5 修改爬虫执行文件**test.py**
+#### 1.6.5 修改爬虫执行文件**test.py**
 添加新的类属性
 	
 	project_test_list = []
@@ -113,4 +113,64 @@ selenium
 	
 
 # 2.部署ElasticSearch
+## 2.1 启动主节点
+
+运行ES_master/bin中的elasticsearch
+
+## 2.2 启动UI
+
+在elasticsearch-head-master中执行
+
+	npm run start
+
+## 2.3 拓展（修改ES节点）
+
+修改ES_master/config中的elasticsearch.yml文件
+
+# 3. Java过滤器
+## 3.1 Maven 依赖
+	
+	 <!-- https://mvnrepository.com/artifact/org.elasticsearch.client/transport -->
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>transport</artifactId>
+            <version>6.1.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        
+## 3.2 log4j2.properties
+
+	appender.console.type = console
+	appender.console.name = console
+	appender.console.layout.type = PatternLayout
+	rootLogger.level = info
+	rootLogger.appenderRef.console.ref =console
+
+## 3.3 修改过滤规则
+
+修改**ES_SearchAll.java**中的CorrectRecord方法
+
+## 3.4 修改过滤器读写的ES节点
+
+修改**ES_utility.java**中的client的连接方式
+
+
 
