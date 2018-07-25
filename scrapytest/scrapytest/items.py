@@ -44,50 +44,5 @@ class ScrapytestItem(scrapy.Item):
 
     crawl_time = scrapy.Field()
 
-    # pass
-"""
-    def save2es(self):
-
-        lagou_type = LagouType()
-        lagou_type.project_url = self['project_url']
-        lagou_type.project_name = self['project_name']
-        lagou_type.project_category = self['project_category']
-        lagou_type.project_apartment = self['project_apartment']
-        lagou_type.project_location = self['project_location']
-        lagou_type.project_publish_time = self['project_publish_time']
-
-        lagou_type.project_file_time = self['project_file_time']
-        lagou_type.project_file_price = self['project_file_price']
-        lagou_type.project_file_location = self['project_file_location']
-
-        lagou_type.project_bit_time = self['project_bit_time']
-        lagou_type.project_bit_location = self['project_bit_location']
-
-        lagou_type.project_except_amount = self['project_except_amount']
-        lagou_type.project_manager = self['project_manager']
-        lagou_type.project_manager_tel = self['project_manager_tel']
-
-        #lagou_type.crawl_time = self['crawl_time']
-
-        #lagou_type.meta.id = self['url_object_id']
-
-        lagou_type.save()
-
-
-        if es.indices.exists(index='lagou3') is not True:
-            print('ES index created failed!!!!!!!')
-
-        print('Search all ==================================')
-        _query_all = {
-            'query':{
-                'match_all':{}
-            }
-        }
-
-        _searched = es.search(index = 'lagou3', body = _query_all)
-        print(_searched)
-
-        return
-"""
 
 

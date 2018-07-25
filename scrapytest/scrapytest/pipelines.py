@@ -12,10 +12,6 @@ es = Elasticsearch()
 
 class ScrapytestPipeline(object):
     def process_item(self, item, spider):
-        #print(item["name"])
-        #print(item["url"])
-        #print('title')
-        #print(item['title'])
 
         lagou_type = LagouType()
 
@@ -39,6 +35,4 @@ class ScrapytestPipeline(object):
 
         lagou_type.save()
 
-
-        #item.save2es()
         return item
