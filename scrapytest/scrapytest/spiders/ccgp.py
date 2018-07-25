@@ -20,6 +20,10 @@ from .ParameterXMLHandler import ParameterXMLHandler
 
 
 class CcgpSpider(CrawlSpider):
+
+    """
+    TODO: change spider name here
+    """
     name = 'ccgp'
 
     page_file = []
@@ -105,8 +109,19 @@ class CcgpSpider(CrawlSpider):
                 self.driver.close()
                 break
 
-        with open('url_set.txt', mode = 'w') as f:
-            f.write(repr(self.url_set))
+        sourcefile = []
+        for line in open('urlFile.txt'):
+            line = line.strip("\n")
+            sourcefile.append(line)
+
+        for ele in self.url_set:
+            if ele in sourcefile:
+                self.url_set.remove(ele)
+            else:
+                sourcefile.append(ele)
+
+        with open('urlFile.txt', mode = 'w') as f:
+            f.write(repr(sourcefile))
 
         for link in self.url_set:
             self.Global_Index = index
