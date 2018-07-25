@@ -224,6 +224,13 @@ public class ReadXML {
 
     }
 
+    /***
+     * TODO: change ES search method/strategy here
+     *
+     * @param qb
+     * @param index
+     * @param type
+     */
     public void Search(QueryBuilder qb, String index, String type) {
 
         SearchRequestBuilder responsebuilder = this.client
