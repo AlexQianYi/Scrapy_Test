@@ -15,7 +15,7 @@ public class ES_search_main {
 
         ReadXML readXML = new ReadXML(client);
         String file_path = ES_utility.getSearchXML_file();
-        QueryBuilder qb = readXML.getQueryRules2(file_path);
+        QueryBuilder qb = readXML.getQueryRules(file_path);
 
         readXML.Search(qb, "original_project_file", "doc");
     }

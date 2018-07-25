@@ -172,5 +172,18 @@ selenium
 
 修改**ES_utility.java**中的client的连接方式
 
+# 4. Java查询ElasticSearch
+## 4.1 Maven依赖
+和Java过滤器相同
+## 4.2 log4j2.properties
+和Java过滤器相同
+## 4.3 查询规则
+查询规则采用从**QueryControl.xml**中读取的方法，每一个xml文件对应到一个用户所订阅的关键词
+## 4.4 修改查询规则
+对于关键词的合并规则，例如与还是或，修改**ReadXML.java**中的getQueryRules方法。
+must表示与合并
+## 4.5 检索ES方式修改
+ES有几种不同的检索方式，可以根据需求修改**ReadXML.java**中的Search方法。
+
 
 

@@ -42,31 +42,17 @@ public class ReadXML {
         }
     }
 
-    public static QueryBuilder getQueryRules(String fileName) throws IOException, SAXException {
-
-        document = db.parse(fileName);
-
-        NodeList rule_list = document.getElementsByTagName("Rule");
-        org.w3c.dom.Node node = rule_list.item(0);
-
-        NamedNodeMap namedNodeMap = node.getAttributes();
-
-        //String project_name = namedNodeMap.getNamedItem("project_name").getTextContent();
-        String project_location = namedNodeMap.getNamedItem("project_location").getTextContent();
-
-        System.out.println(project_location);
-
-        MatchPhraseQueryBuilder mpq_project_location = QueryBuilders
-                                    .matchPhraseQuery("project_location", project_location);
-
-        QueryBuilder qb = QueryBuilders.boolQuery()
-                            .must(mpq_project_location);
-
-        return qb;
-
-    }
-
-    public static QueryBuilder getQueryRules2(String fileName) throws ParserConfigurationException, IOException, SAXException {
+    /***
+     * TODO: change the rule to combine the keywords here
+     * @param fileName
+     * @return
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     *
+     * get the ES search query rules here
+     */
+    public static QueryBuilder getQueryRules(String fileName) throws ParserConfigurationException, IOException, SAXException {
 
         File f = new File(fileName);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
