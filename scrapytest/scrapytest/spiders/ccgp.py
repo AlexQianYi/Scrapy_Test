@@ -125,9 +125,9 @@ class CcgpSpider(CrawlSpider):
 
         for link in self.url_set:
             self.Global_Index = index
-            yield scrapy.Request(link, callback = self.parse_item_ccgp_content)
+            yield scrapy.Request(link, callback = self.parse_itemre_content)
 
-    def parse_item_ccgp_content(self, response):
+    def parse_item_content(self, response):
 
         print('parse item url: ' + response.url)
         item = ScrapytestItem()

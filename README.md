@@ -100,5 +100,17 @@ selenium
 #### 2.4.4 修改爬虫配置文件**test.xml**
 在**test.xml**添加修改待爬取信息的xpath
 #### 2.4.5 修改爬虫执行文件**test.py**
+添加新的类属性
+	
+	project_test_list = []
+在解析爬虫配置文件方法ReadConfigXML中更新类属性
+	
+	 project_test = ParaXMLHandler.find_nodes('project_test')
+        self.project_test_list.append(project_test[0].text)
+在 parse_item_content方法中添加解析规则
 
+	item['project_test'] = response.xpath(self.project_test_list[self.Global_Index]).extract()
+	
+
+# 2.部署ElasticSearch
 
