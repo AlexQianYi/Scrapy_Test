@@ -83,5 +83,22 @@ selenium
 	doc_type = 'project_file' -> doc_type = 'doc'
 
 ### 2.4 拓展（修改爬取内容）
-#### 2.4.1 
+#### 2.4.1 修改**items.py**
+
+**items.py**中定义了爬虫所需要爬取的所有元素的key。
+
+#### 2.4.2 修改**EsModel.py**
+
+**EsModel.py**中定义了每个key在ES中的保存方式（中文分词ik在这里添加），是否分词，是否定义为关键词等。
+
+#### 2.4.3 修改**pipelines.py**
+
+**pipelines.py**中首先会实例化一个ES，然后将之前在items.py中定义的所爬取到的key存入到对应的ES中的位置。访问爬虫所爬取到的内容类似于HashMap.
+	
+	"ES中对应的字段“ = item[key]
+	
+#### 2.4.4 修改爬虫配置文件**test.xml**
+在**test.xml**添加修改待爬取信息的xpath
+#### 2.4.5 修改爬虫执行文件**test.py**
+
 

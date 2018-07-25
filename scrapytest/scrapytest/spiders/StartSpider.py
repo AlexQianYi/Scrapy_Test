@@ -20,7 +20,7 @@ def startSpider():
 
     """
     
-    add multi-thread here
+    TODO: add multi-thread here
 
     """
     for i in cmd_list:
