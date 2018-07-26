@@ -107,7 +107,7 @@ selenium
 	
 	 project_test = ParaXMLHandler.find_nodes('project_test')
         self.project_test_list.append(project_test[0].text)
-在 parse_item_content方法中添加解析规则
+在 parse\_item_content方法中添加解析规则
 
 	item['project_test'] = response.xpath(self.project_test_list[self.Global_Index]).extract()
 	
@@ -184,6 +184,16 @@ selenium
 must表示与合并
 ## 4.5 检索ES方式修改
 ES有几种不同的检索方式，可以根据需求修改**ReadXML.java**中的Search方法。
+
+
+# 5. Tips
+## 5.1 获取xpath的方法
+	
+	Chrome打开待爬取网页 -> 更多工具 -> 开发者工具 ->
+	 Select an element in the page to inspect it -> 
+	 在网页页面中选择需要提取xpath的元素 -> 右键 ->
+	 Copy xpath即可
+	 
 
 
 
