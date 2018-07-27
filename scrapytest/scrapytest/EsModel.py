@@ -9,7 +9,8 @@ from elasticsearch_dsl.analysis import CustomAnalyzer
 from datetime import datetime
 
 # Step 1 Create ES connection
-connections.create_connection(hosts = ["localhost"])
+#connections.create_connection(hosts = ["localhost"])
+connections.create_connection(hosts = ["192.168.103.229:9201"])
 
 class LagouType(Document):
 

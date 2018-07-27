@@ -114,6 +114,7 @@ class CcgpSpider(CrawlSpider):
             line = line.strip("\n")
             sourcefile.append(line)
 
+        """
         for ele in self.url_set:
             if ele in sourcefile:
                 self.url_set.remove(ele)
@@ -122,14 +123,16 @@ class CcgpSpider(CrawlSpider):
 
         with open('urlFile.txt', mode = 'w') as f:
             f.write(repr(sourcefile))
+        """
 
         for link in self.url_set:
             self.Global_Index = index
-            yield scrapy.Request(link, callback = self.parse_itemre_content)
+            yield scrapy.Request(link, callback = self.parse_item_content)
 
     def parse_item_content(self, response):
 
-        print('parse item url: ' + response.url)
+
+        print('-----------------parse item url: ' + response.url)
         item = ScrapytestItem()
 
         item['project_url'] = response.url

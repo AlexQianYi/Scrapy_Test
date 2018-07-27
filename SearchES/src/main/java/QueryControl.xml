@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+
+<Rule>
+
+	<project_name>""</project_name>
+
+	<project_category>""</project_category>
+
+	<project_apartment>北京中医药大学东方医院</project_apartment>
+
+	<project_location>北京市</project_location>
+
+	<project_publish_time>""</project_publish_time>
+
+	<project_file_time>""</project_file_time>
+
+	<project_file_price>""</project_file_price>
+
+	<project_file_location>""</project_file_location>
+
+	<project_bit_time>""</project_bit_time>
+
+	<project_bit_location>""</project_bit_location>
+
+	<project_except_amount>""</project_except_amount>
+
+	<project_manager>""</project_manager>
+
+	<project_manager_tel>""</project_manager_tel>
+
+	<empty>""</empty>
+
+</Rule>

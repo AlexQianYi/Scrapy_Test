@@ -5,15 +5,28 @@
 <SpiderControl>
 	<PageFiles>
 		<PageFile id="1">
+
 			<FilePath>./CCGP_bit_invitation.xml</FilePath>
+
+			<Frequency>3000</Frequency>
+
+			<cmd>scrapy crawl ccgp</cmd>
 		</PageFile>
 		
 		<PageFile id="2">
+
 			<FilePath></FilePath>
+
+			<Frequency></Frequency>
+
+			<cmd></cmd>
+
 		</PageFile>
 
 		<PageFile id="3">
 			<FilePath></FilePath>
+			<Frequency></Frequency>
+			<cmd></cmd>
 		</PageFile>	
 	</PageFiles>
 </SpiderControl>
